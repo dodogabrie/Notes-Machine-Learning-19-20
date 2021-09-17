@@ -4,29 +4,33 @@
 \section{Introduction}
 \epigraph{The problem of learning is arguably at the very core of the problem of intelligence, both biological and artificial}{\textit{Poggio, Shelton, AI Magazine 1999}}
 \subsection{What is ML}
- The field of \textbf{machine learning} is concerned with the question of how to construct computer programs that automatically improve with experience. In recent years many successful machine learning applications have been developed, ranging from data-mining programs that learn to detect fraudulent credit card transactions, to information-filtering systems that learn users' reading preferences, to autonomous vehicles that learn to drive on public highways. At the same time, there have been important advances in the theory and algorithms that form the foundations of this field. Machine learning draws on concepts and results from many fields, including statistics, artificial intelligence, philosophy, information theory, biology, cognitive science, computational complexity, and control theory\\
- 
- \textbf{Machine Learning} has emerged as an area of research combining the aims of \textit{creating computers that could learn} (AI - Build adaptive/personalized intelligent systems) and new powerful \textit{adaptive/statistical tools} with rigorous foundation in computational science for data analysis.\\
+ The field of \textbf{machine learning} is concerned with the question of how to construct computer programs that automatically improve with experience. \\
+In recent years many successful machine learning applications have been developed, ranging from data-mining programs that learn to detect fraudulent credit card transactions, to information-filtering systems that learn users' reading preferences, to autonomous vehicles that learn to drive on public highways. \\
+At the same time, there have been important advances in the theory and algorithms that form the foundations of this field. Machine learning draws on concepts and results from many fields, including statistics, artificial intelligence, philosophy, information theory, biology, cognitive science, computational complexity, and control theory.
 
-So \textbf{Learning} is the major challenge and a strategic way to provide intelligence into the systems.
+ \textbf{Machine Learning} has emerged as an area of research combining the aims of \textit{creating computers that could learn} (AI - Build adaptive/personalized intelligent systems) and new powerful \textit{adaptive/statistical tools} with rigorous foundation in computational science for data analysis.\\
+\textbf{Learning} is the major challenge and a strategic way to provide intelligence into the systems.
 
 \theoremstyle{definition}
-\begin{definition}
+\begin{definition}[Learning Computer]
 A computer program is said to \textbf{learn} from experience \textit{E} with respect to some class of tasks \textit{T} and performance measure \textit{P}, if its performance at tasks in \textit{T}, as measured by \textit{P}, improves with experience \textit{E}.
 \end{definition}
 
 The ML studies and proposes methods to build (infer) a model (dependencies / functions / hypotheses) from examples of observed data
 \begin{itemize}
-    \item that fits the know examples
-    \item able to generalize, with reasonable accuracy for new data (according to verifiable results, under statistical and computational conditions and criteria)
-    \item Considering the expressiveness and algorithmic complexity of the models and learning algorithms
+    \item That fits the known examples.
+    \item Able to generalize with reasonable accuracy for new data (according to verifiable results, under statistical and computational conditions and criteria).
+    \item Considering the expressiveness and algorithmic complexity of the models and learning algorithms.
 \end{itemize}
-E.g. Inferring general functions from know data:
+\begin{example}[Inferring general functions from know data]
+Two famous examples of ML tasks:
 \begin{itemize}
     \item Handwriting Recognition: $x$ (Data from pen motion) and $f(x)$ (Letter of the alphabet)
     \item Face recognition: $x$ (Bitmap picture of person's face) $f(x)$ (Name of the person)
-\end{itemize}
-So we have some opportunity (if useful) and awareness (needs and limits):\\
+\end{itemize}   
+\end{example}
+
+So we have some opportunity (if useful) and awareness (needs and limits):
 
 \textbf{Utility of predictive models: (in the following cases)}:
 \begin{itemize}
@@ -43,14 +47,15 @@ So we have some opportunity (if useful) and awareness (needs and limits):\\
 \subsection{Overview: Components of a ML System}
 Main components of a ML system, Framework as a guide to the key design choices:
  
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.3]{lectures/1_Introduction/comp.png}
 \caption{Components of a ML system}
 \label{fig:MLComponents}
 \end{figure}
+
 \subsection{Data}
-The data represent the available facts (experience). Representation problem: to capture the structure of the analyzed objects. \textbf{Type}: Flat, Structured, ...\\
+The data represent the available facts (experience). Representation problem: to capture the structure of the analyzed objects. \textbf{Type}: Flat, Structured, ...
 
 \noindent We will generally use flat data:\\
  E.g. \textbf{Flat DATA} (attribute-value language): fixed-size vectors of properties (features), single table of tuple (measurements of the objects), Attributes can be discrete or continuous
@@ -59,8 +64,8 @@ The data represent the available facts (experience). Representation problem: to 
 \centering
 \includegraphics[scale=0.4]{lectures/1_Introduction/flat_data.png}
 \end{figure}
- Of course Data type can be different, usually there is a Data Preprocessing step, e.g. Variable scaling, encoding, selection...
- For this step, see in Data Mining: \textit{Data Understanding} and \textit{Data Preparation}.\\
+Of course Data type can be different, usually there is a Data Preprocessing step, e.g. Variable scaling, encoding, selection...
+For this step, see in Data Mining: \textit{Data Understanding} and \textit{Data Preparation}.
 
 \noindent\textbf{Example and terminologies}\\
 Let's see a example with some Medical records in the flat case: 
@@ -74,8 +79,8 @@ Let's see a example with some Medical records in the flat case:
     \item Each row ($\mathbf{x}$, vector): example, pattern, instance, sample,...
     \item Dimension of data set: number of examples $l$
     \item Dimension (of $\mathbf{x}$): number of features $n$
-    \item If we will index the features/inputs/variables by $j$ :
-variable $x_j$ is (typically) the j-th feature/property/attribute/element of $\mathbf{x}$.
+    \item If we will index the features/inputs/variables by $j$ : 
+	variable $x_j$ is (typically) the j-th \\ feature/property/attribute/element of $\mathbf{x}$.
 \end{itemize}
 but may be to simplify we need to use subscript index for other meanings
 \begin{itemize}
@@ -96,14 +101,13 @@ categorical” variables (e.g small, medium, large)
     \includegraphics[scale=0.45]{lectures/1_Introduction/data_encoding.png}
     \end{figure}
     This is useful because the scalar product between two vectors representing two coded symbols is zero. The vectors are orthogonal, this implies that there is no relation between the category symbols.
-
 \end{itemize}
 
 \noindent Another types of Data:\\
 \noindent E.g. \textbf{Structures DATA}: Sequences (lists), trees, graphs, Multi-relational data (table) (in DB)\\
-Examples: images, microarray, temporal data, strings of a language, DNA e proteins, hierarchical relationships, molecules, hyperlink connectivity in web pages, ...\\
+Examples: images, microarray, temporal data, strings of a language, DNA e proteins, hierarchical relationships, molecules, hyperlink connectivity in web pages, ...
 
-\noindent\textbf{Further terminologies}\\
+\noindent\textbf{Further terminologies}
 \begin{itemize}
     \item \textbf{Noise}: addition of external factors to the stream of target information (signal); due to randomness in the measurements, not due to the underlying law: e.g. Gaussian noise
     
@@ -111,7 +115,6 @@ Examples: images, microarray, temporal data, strings of a language, DNA e protei
     \centering
     \includegraphics[scale=0.2]{lectures/1_Introduction/sig_noise.jpg}
     \end{figure}
-  
 
     \item \textbf{Outliers}: are unusual data values that are not consistent with most observations (e.g. due to abnormal measurements errors). Some operation can be perform: outlier detection and preprocessing (removal) or we have to use some Robust Modeling Methods.
     \item \textbf{Feature selection}: selection of a small number of informative features: it can provide an optimal representation for a learning problem
@@ -122,40 +125,47 @@ The task defines the purpose of the application: Knowledge that we want to achie
 There are two main categories of tasks:
 \begin{itemize}
     \item \textbf{Predictive} (Classification, Regression): function approximation (build a function from examples)
+	\begin{figure}[H]
+	    \centering
+	    \includegraphics[width=0.8\textwidth]{lectures/1_Introduction/task_pred.png}
+	    \label{fig:task-scheme}
+	\end{figure}
     \item \textbf{Descriptive} (Cluster Analysis, Association Rule): find subsets or groups of unclassified data
 \end{itemize}
-We can usually divide tasks in \textit{Supervised Learning} and \textit{Unsupervised Learning}:\\
+We can usually divide tasks in \textit{Supervised Learning} and \textit{Unsupervised Learning}:
 
-\noindent\textbf{Supervised Learning}\\
+\subsubsection*{Supervised Learning}%
 Given a training example as $<input,output>=<\textbf{x},d>$ (\textbf{labeled example}) for an unknown function $f$, the aim is to find a \emph{good} approximation to $f$ (an \textbf{hypothesis} $h$ that can used for prediction on unseen data \textbf{x'}).\\
 Target $d$ (or $t$ or $y$) is given by the teacher according to a $f(\mathbf{x})$ (unknown function), $d$ is usually a numerical/categorical label:
 \begin{itemize}
     \item \textit{Classification}: discrete value outputs: 
-    $$ f(\mathbf{x}) \in \{1, 2, \dots, \} \; \; \text{classes (discrete-valued function)}$$ 
+	\[
+    	f(\mathbf{x}) \in \{1, 2, \dots, K\} \; \; \text{classes (discrete-valued function)}
+	.\] 
     \item \textit{Regression}: real continuous output values (approximate a real-valued
 target function)
 \end{itemize}
-Note: we can use the same model, we only have to change the domain of the output (Unified vision thanks to the formalism of func. approximation)\\
-\newline
-\textbf{Unsupervised Learning}\\
+Note: we can use the same model, we only have to change the domain of the output (Unified vision thanks to the formalism of func. approximation).
+
+\subsubsection*{Unsupervised Learning}%
 Given a training set of \textbf{unlabeled data} $<\textbf{x}>$, the aim is to find a \emph{natural groupings} in the set.
 Some taks are:
 \begin{itemize}
     \item Clustering, see figure \ref{fig:intro_clusterinng_exp}
-    \begin{figure}
-        \centering
-        \includegraphics[scale=0.5]{lectures/1_Introduction/clustering.png}
-        \caption{An Example of Clustering, Partition of data into clusters (subsets of “similar” data)}
-        \label{fig:intro_clusterinng_exp}
-    \end{figure}
     \item Dimensionality reduction/ Visualization/Preprocessing
     \item Modeling the data density
 \end{itemize}
-
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{lectures/1_Introduction/clustering.png}
+    \caption{An Example of Clustering, Partition of data into clusters (subsets of “similar” data)}
+    \label{fig:intro_clusterinng_exp}
+\end{figure}
 \subsubsection{Classification}
-(Supervised) Classification: Patterns (features vectors) are seen as members of a class and the goal is to assign the patterns observed classes (label). So, the aim is to find a \emph{good} approximation to $f(\textbf{x})$ (an \textbf{hypothesis} $h$) that can be used to return a prediction on unseen data \textbf{x'} and tell what class \textbf{x'} belongs to, see figure \ref{fig:intro_classification_exp1}.\\
+(Supervised) Classification: Patterns (features vectors) are seen as members of a class and the goal is to assign the patterns observed classes (label). \\
+So, the aim is to find a \emph{good} approximation to $f(\textbf{x})$ (an \textbf{hypothesis} $h$) that can be used to return a prediction on unseen data \textbf{x'} and tell what class \textbf{x'} belongs to, see figure \ref{fig:intro_classification_exp1}.
 
-If the number of classes is 2, the approximation of $f(\textbf{x})$ is a boolean function (binary classification, \textbf{concept learning}), instead if the number of classes is greater than 2, we talk about \emph{multi-class problem} $(C_1, C_2, \dots, C_k)$.\\
+If the number of classes is 2, the approximation of $f(\textbf{x})$ is a boolean function (binary classification, \textbf{concept learning}), instead if the number of classes is greater than 2, we talk about \emph{multi-class problem} $(C_1, C_2, \dots, C_k)$.
 
 \begin{figure}
     \centering
@@ -166,7 +176,7 @@ If the number of classes is 2, the approximation of $f(\textbf{x})$ is a boolean
 
 The classification may be viewed as the allocation of the input space in decision regions (e.g. 0/1) and we want to find a linear separator on an instance space $\mathbf{x} = (x_1, x_2) \text{in } \mathbb{R}^2$ where $f(x)= 0/1 (\text{or } -1/+1 )$. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \subfloat[Separating (hyper)plane : $x$.]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/classification.png}\label{fig:f1}}
   \hfill
@@ -193,7 +203,7 @@ In figure \ref{fig:f1} we can see an hyperplane which separates the points and t
         \label{fig:intro_regression_exp1}
     \end{figure}
     Regression: $x =$ variables (e.g real values), ($f(x)+\text{random noise}$) real values that we know, so we want to find a curve that best fit the data: \textit{curve fitting}.
-    \begin{figure}[h]
+    \begin{figure}[ht]
         \centering
         \includegraphics[scale = 0.4]{lectures/1_Introduction/regression.png}
     \end{figure}
@@ -209,23 +219,27 @@ There are other types that we will not discuss, like:
     This is usually a supervised learning task with some police!
     \begin{figure}[H]
         \centering
-        \includegraphics[scale = 0.4]{lectures/1_Introduction/Reinforcement_Learning.png}
+        \includegraphics[scale = 0.6]{lectures/1_Introduction/Reinforcement_Learning.png}
     \end{figure}
 
     \item \textbf{Semi-supervised learning}: combines both labeled and unlabeled examples to generate an appropriate function or classifier.
-\end{itemize}, 
+\end{itemize}
 
 \subsection{Models}
-The aim is to capture/describes the relationships among the data (on the basis of the task) by a “language”. The “language” is related to the representation used to get knowledge. It defines the class of functions that the learning machine can implement (\emph{hypothesis space}). E.g. set of functions $h(x,w)$, where $w$ is the (abstract) parameter.\\
+The aim is to capture/describes the relationships among the data (on the basis of the task) by a “language”. The “language” is related to the representation used to get knowledge. It defines the class of functions that the learning machine can implement (\emph{hypothesis space}). \\
+E.g. set of functions $h(x,w)$, where $w$ is the (abstract) parameter.
 
-Here some definition:
+\begin{definition}[Model main terms]
+The terminologies associated to the model is:
 \begin{itemize}
     \item \textbf{Training examples} (supervised learning):\\
     An example of the form $(x, f(x))$. $x$ is usually a vector of features, $t=f(x)$ is called the target value.
     \item \textbf{Target function}: The true function $f$ (that we don't have! we want to approximate it!)
     \item \textbf{Hypothesis}: A proposed function $h$ believed to be similar to $f$. An expression in a given \emph{language} that describes the relationships among data.
     \item \textbf{Hypotheses space (H)}: The space of all hypotheses that can, in principle be output by the learning algorithm (set of functions $h(x,w)$, where $w$ is the parameter), this is a Hilbert Space.
-\end{itemize}
+\end{itemize}   
+\end{definition}
+
 
 Some models are shown here:
 \begin{figure}[H]
@@ -264,27 +278,35 @@ Another example: we will see a \textbf{neural networks}, beyond the neurobiologi
 \end{itemize}
 
 \subsubsection{How many models?}
-\textbf{No Free Lunch Theorem} : there is no universal “best” learning method (without any knowledge, for any problems,...): if an algorithm achieves superior results on some problems, it must pay with inferiority on other problems. In this sense there is no free lunch.\\
-
-The course provide a set of models and the critical instrument to compare them.\\
-
-\textbf{NOTE}: However, not all the models are equivalent: (instead of assuming a specific form for the target function (parametric models in classical Statistics))\\
-The core of ML is on flexible approaches that can in principle approximate arbitrary functions (universal approximation property)
+\begin{theorem}[No Free Lunch Theorem]
+There is no universal “best” learning method (without any knowledge, for any problems,...): if an algorithm achieves superior results on some problems, it must pay with inferiority on other problems. In this sense there is no free lunch.
+\end{theorem}
+\textbf{NOTE}: However, not all the models are equivalent: (instead of assuming a specific form for the target function (parametric models in classical Statistics)).\\
+The course provide: 
 \begin{itemize}
-    \item Typical powerful models of ML: e.g. Neural Networks
-    \item ...but “power is nothing without control”
-    \item We need of inductive principia for the control of the complexity
+    \item A set of models.
+    \item The critical instrument to compare them.
 \end{itemize}
+ 
+
+The core of ML is on flexible approaches that can in principle approximate arbitrary functions (universal approximation property).
+
+\textbf{NOTE}: Typical powerful models of ML are Neural Networks, always remeber that “power is nothing without control”: we need of inductive principia for the control of the complexity.
+
 \subsection{Learning Algorithms}
 A Learning Algorithms is basing on data, task and model!\\
-(Heuristic) search through the hypothesis space \emph{H} of the \textbf{best hypothesis} (Typically searching for the h with the minimum “error”, the best approximation to the (unknown) target function). Practically we want to find parameters $w$ that give the best $h$.\\
-\newline
+(Heuristic) search through the hypothesis space \emph{H} ($h \in \emph{H}$) of the \textbf{best hypothesis} (Typically searching for the h with the minimum “error”, the best approximation to the unknown target function). Practically we want to find parameters $w$ that give the best $h$.
+
+\begin{example}
+    Learning could mean to search the best $\boldsymbol{w}$  for the linear models or best rules for symbolic model.
+\end{example}
+
 \emph{H} may not coincide with the set of all possible functions and the search can not "be exhaustive": it needs to make assumptions (we will see the role of \emph{Inductive bias}), see figure \ref{fig:lern_search}.
 
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.35]{lectures/1_Introduction/intro_search.png}
-    \caption{Search on the hypothesis space}
+    \caption{(Local) search on the hypothesis space: each point is a function, we set an initial condition and we move to a set of optimal solution (red).}
     \label{fig:lern_search}
 \end{figure}
 
@@ -305,23 +327,43 @@ According to the different paradigms/contexts “learning” can be differently 
     \item Or using other terminologies e.g. “Fitting a multivariate function”
 \end{itemize}
 
+\subsection{Role of inductive bias}%
+In order to set up a model and a learning algorithm we can make
+assumptions (about the nature of the target function) concerning either
+\begin{itemize}
+    \item Constraints in the model (in the hypothesis space H, due to the set of
+	hypotheses that we can express or consider) (Language Bias). For example we can search only on linear function.
+    \item Constraints or preferences in learning algorithm/search strategy (Search Bias). For example we could choose to search only some $\boldsymbol{w}$ for the linear search.
+    \item Or Both.
+\end{itemize}
+We will see that such assumptions are strictly need to obtain an useful model for the ML aims, i.e. a model with generalization capabilities.\\
+We start to discuss it within examples in discrete hypotheses spaces (rules) , learning a concept (a Boolean function) [Mitchell chapt. 2]
+\begin{example}
+x is a “cat” if h cat ( x ) =1, otherwise is 0 for x in “animals”
+\end{example}
+\begin{example}
+    Learning a boolean function (boolean input/output) given the True table \ldots slides 119 and 120
+\end{example}
+ADD SLIDES 119---> 128
 \subsection{Task + Model = Loss}
-We have to find a  “\textbf{good}” approximation to f from examples. How to measure the quality of the approximation?\\
+We have to find a  “\textbf{good}” approximation to f from examples. How to measure the quality of the approximation?
 
-\noindent We want to measure the “distance” between $h(x)$ (output of the model for input $\mathbf{x}$) and $d$ (according to a $f(\mathbf{x}) + \text{random noise}$)\\
+\noindent We want to measure the “distance” between $h(x)$ (output of the model for input $\mathbf{x}$) and $d$.
 \begin{center}
 \textit{Minimization of errors in training, check of errors in test}\\
 \end{center}
 \noindent We will use:
 \begin{itemize}
     \item \emph{Loss function}: $L(h(\textbf{x}),d)$ (high value means poor approximation)
-    \item The Error (or Risk) is an expected value of the loss\\
-    $$\text{\emph{Empirical Risk}}: R_{emp}=\sum_{i=1}^{l} L(h(\textbf{x}),d)$$
+    \item The Error (or Risk) is an expected value of the loss:
+	\[
+	    \text{\emph{Empirical Risk}}: R_{emp}= \frac{1}{l} \sum_{i=1}^{l} L(h(\textbf{x}_i),d_i)
+	.\] 
     e.g. a “sum” or mean of the loss over the set of samples.
 \end{itemize}
-We will change $L$ for different tasks.\\
+We will change the loss function $L$ for different tasks.
 
-\noindent\textbf{Common Tasks review}\\
+\subsubsection*{Common Tasks review}%
 A possible classifications of common learning tasks specifying the (changing of the) nature of the loss function, output and hypothesis space.
 \begin{itemize}
     \item Survey of common learning tasks
@@ -329,13 +371,17 @@ A possible classifications of common learning tasks specifying the (changing of 
 \end{itemize}
 
 \subsubsection{Loss Function example: Regression}
-In a regression task we want to predict a numerical value. We have an \textbf{Hypothesis Space} $H$ that is a set of real-valued functions and the \textbf{Loss function} will measures the approximation accuracy/error between $h(x_i)$ and $d_i = f(x_i) + e$ (real value function + random error).\\
+In a regression task we want to predict a numerical value. We have an \textbf{Hypothesis Space} $H$ that is a set of real-valued functions and the \textbf{Loss function} will measures the approximation accuracy/error between $h(x_i)$ and $d_i = f(x_i) + e$ (real value function + random error).
 
-A common loss function for Regression (predicting a numerical value) is the \emph{squared error}: $L(h(\textbf{x}_{i}),d_{i}) = (d_{i} - h(\textbf{x}_{i}))^{2}$ ( squared error because we want the distance and a negative or positive value makes no different).
+A common loss function for Regression (predicting a numerical value) is the \emph{squared error}: 
+\[
+ L(h(\textbf{x}_{i}),d_{i}) = (d_{i} - h(\textbf{x}_{i}))^{2}   
+.\] 
+We use that error because we want the distance and a negative or positive value makes no different).
 \begin{center}
     $R_{emp}$: the mean over the data set provide the \emph{Mean Square Error} (MSE)
 \end{center}
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale=0.4]{lectures/1_Introduction/mse.png}
 \end{figure}
@@ -355,13 +401,14 @@ Classification of data into discrete classes, $d_i$ can be e.g. $0/1$ and $h(x_i
 \begin{center}
     $R_{emp}$: The mean over the data set provide the number/percentage of misclassified patterns
 \end{center}
-
-E.g. 20 out of 100 are misclassified $\rightarrow$ 20\% errors, i.e. 80\% of accuracy
+\begin{example}
+    20 out of 100 are misclassified $\rightarrow$ 20\% errors, i.e. 80\% of accuracy
+\end{example}
 
 \subsubsection{Loss Function example: Clustering and Vector Quantization}
-\textbf{Goal}: optimal partitioning of unknown distribution in x-space into regions (clusters) approximated by a cluster center or prototype. e.g see figure \ref{fig:intro_clusterinng_exp}\\
+\textbf{Goal}: optimal partitioning of unknown distribution in x-space into regions (clusters) approximated by a cluster center or prototype. e.g see figure \ref{fig:intro_clusterinng_exp}
 
-\noindent \textbf{H}: a set of vector quantizers $ x \rightarrow c(x) \;\;( \text{continuosspace} \rightarrow \text{discrete space})$\\
+\noindent \textbf{H}: a set of vector quantizers $ x \rightarrow c(x) \;\;( \text{continuosspace} \rightarrow \text{discrete space})$
 
 \noindent \textbf{Loss Function}: would be the squared error distortion:
 $$L(h(\textbf{x}_{i})) = \langle\,(\mathbf{x}_i - h(\mathbf{x}_i))\,, (\mathbf{x}_i - h(\mathbf{x}_i))\rangle \quad \text{( inner product )}$$
@@ -378,8 +425,9 @@ Density estimation (generative, “parametric methods”) from an assumed class 
 
 
 \subsection{GENERALIZATION}
-Learning: search for a good function in a function space from known data (typically minimizing an Error/Loss), but how we can say that this model is good for our task after the learning step?\\
+Learning: search for a good function in a function space from known data (typically minimizing an Error/Loss), but how we can say that this model is good for our task after the learning step?
 
+\textbf{Note}: This is the answer for the question: "What's the meaninng of Machine Learning?"
 \begin{center}
     A model is Good with respect to the \textbf{generalization error}: how accurately the model predicts over novel samples of data (Error/Loss measured over new data) 
 \end{center}
@@ -391,7 +439,7 @@ So we have two main phases:
     \item \textbf{Learning} phase \textbf{(training, fitting)}: build the model from know data – \emph{training data} (and bias).
     \item \textbf{Predictive} phase \textbf{(test)}: apply to new example (we take the input $\textbf{x}$ and we compute the response by the model): evaluation of the predictive hypothesis, i.e. of the \textbf{generalization capability}.
 \end{itemize}
-The Predictive phase correspond to the Deployment/Inference use of the ML built model.\\
+The Predictive phase correspond to the Deployment/Inference use of the ML built model.
 
 \noindent$\Rightarrow$ Generalization is a crucial point of ML!!!
 \begin{center}
@@ -401,7 +449,7 @@ The Predictive phase correspond to the Deployment/Inference use of the ML built 
 
 \noindent Accuracy/performance estimation is a critical aspect, we can do it by:
 \begin{itemize}
-    \item theory to understand under what mathematical conditions a model is able to generalize (\textit{Statistical Learning Theory} [Vapnik])
+    \item theory to understand under what mathematical conditions a model is able to generalize (\textit{Statistical Learning Theory} [Vapnik]). For example: how many data is needed to generalized? It makes sense to use few data to generalize?
     \item Empirical (training, test) and cross-validation techniques
 \end{itemize}
 
@@ -411,17 +459,16 @@ The Predictive phase correspond to the Deployment/Inference use of the ML built 
 A very important phase is \textbf{Validation}!   
 \end{center}
 
+\begin{definition}[Inductive Learning Hypotesis]
+Any hypothesis $h$ found to approximate the target function ($f)$ well over a sufficiently large
+set of training examples will also approximate the target function well over any other unobserved examples.
+\end{definition}
 
-\noindent Some definition:\\
+This is the fundamental assumption of inductive learning (Supervised learning) (e.g. in concept learning) and we will have much more to say about it.
 
-\textbf{Inductive Learning Hypothesis}: any hypothesis $h$ found to
-approximate the target function ($f)$ well over a sufficiently large
-set of training examples will also approximate the target
-function well over any other unobserved examples.\\
-
-This is the fundamental assumption of inductive learning (Supervised learning) (e.g. in concept learning) and we will have much more to say about it.\\
-
-\textbf{Overfitting}: It output a hypothesis $h(\cdot) \in H$ having true error $\epsilon$ and empirical error $E$, but There is another  $h(\cdot)^{'} \in H$ having $E^{'} > E$ and $\epsilon^{'} < \epsilon$
+\begin{definition}[Overfitting]
+A model is in overfitting if it outputs an hypothesis $h(\cdot) \in H$ having true error $\epsilon$ and empirical error $E$, but There is another  $h'(\cdot) \in H$ having $E' > E$ and $\epsilon' < \epsilon$.
+\end{definition}
 
 \subsubsection{Complexity on case of study}
 Let's take an example with a \textbf{parametric model} for regression: \textbf{Polynomial Curve Fitting Example}, with just one variable and we assume to know the target function, see figure \ref{fig:polynomial_curve} and as error function we will use the Sum-of-Squares Error, see figure \ref{fig:sum_of_square_error}.
@@ -432,7 +479,12 @@ Let's take an example with a \textbf{parametric model} for regression: \textbf{P
     \item $l$ = number of examples
 \end{itemize}
 
-\begin{figure}[H]
+The Hypotesis Space in this case is:
+\[
+    h_w(x) = \sum_{j=0}^{M} w_j x^j
+.\] 
+
+\begin{figure}[ht]
   \centering
   \subfloat[Polynomial Curve Fitting]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_poly_curve_fitting.png}\label{fig:polynomial_curve}}
   \hfill
@@ -440,30 +492,29 @@ Let's take an example with a \textbf{parametric model} for regression: \textbf{P
   \caption{A simple parametric model for regression example}
 \end{figure}
 
-\textbf{Warning}: This is an artificial simplified task (unrealistic due to the use of just 1 input variable, the fact that we know the target function in advance, ...)\\
+\textbf{Warning}: This is an artificial simplified task (unrealistic due to the use of just 1 input variable, the fact that we know the target function in advance, ...).
 
-let's analyze how good is a model if we increase the complexity and how change if the number of data, made available in the training phase, increases.\\
-
+Let's analyze how good is a model if we increase the complexity and how change if the number of data, made available in the training phase, increases.\\
 \noindent \textbf{Case $l = 10$}:\\
-Assume that we have some few data  (figure \ref{fig:polynomial_curve}) and let's see how our model will fit the data if we increase the complexity of the model.\\
+Assume that we have some few data  (figure \ref{fig:polynomial_curve}) and let's see how our model will fit the data if we increase the complexity of the model.
 
 Let's see some cases:
 \begin{itemize}
     \item M = 0: in this case we are in \textbf{underfitting}, we have a very simple model that cannot fit the data. With M = 0 the model it's just the mean. See figure \ref{fig:intro_poly_0}.
     \item M = 1: Linear model,  still a model model, dosen't not fit good the data. See figure \ref{fig:intro_poly_1}.
     \item M = 3, this time, the model seems very good, we have a low error. See figure \ref{fig:intro_poly_2}.
-    \item M = 9: Too complex model, it's fit the noise too!, the error on the training test is $E(w) = 0$, but error on the test set?  See figure \ref{fig:intro_poly_3}. Poor representation of the (green) true function (due to ) \textbf{overfitting}).
+    \item M = 9: Too complex model, it's fit the noise too!, the error on the training test is $E(w) = 0$, but error on the test set?  See figure \ref{fig:intro_poly_3}. Poor representation of the (green) true function due to \textbf{overfitting}.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
-  \subfloat[M = 0]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_poly_0.png}\label{fig:intro_poly_0}}
-  \hfill
-  \subfloat[M = 1]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_poly_1.png}\label{fig:intro_poly_1}}
-  \vskip\baselineskip
-  \subfloat[M = 3]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_poly_2.png}\label{fig:intro_poly_2}}
-  \hfill
-  \subfloat[M = 9]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_poly_4.png}\label{fig:intro_poly_3}}  
+  \subfloat[M = 0]{\includegraphics[width=0.25\textwidth]{lectures/1_Introduction/intro_poly_0.png}\label{fig:intro_poly_0}}
+  %\hfill
+  \subfloat[M = 1]{\includegraphics[width=0.25\textwidth]{lectures/1_Introduction/intro_poly_1.png}\label{fig:intro_poly_1}}
+  %\vskip\baselineskip
+  \subfloat[M = 3]{\includegraphics[width=0.25\textwidth]{lectures/1_Introduction/intro_poly_2.png}\label{fig:intro_poly_2}}
+  %\hfill
+  \subfloat[M = 9]{\includegraphics[width=0.25\textwidth]{lectures/1_Introduction/intro_poly_4.png}\label{fig:intro_poly_3}}  
   \caption{The complexity of the hypothesis increase with the degree M}
 \end{figure}
 
@@ -471,23 +522,21 @@ So let's plot Root-Mean-Square(RMS) Error and see how change with the complexity
 $$ E_{RMS} = \sqrt{2E(w^*)/l}$$
 
 As we can see in figure \ref{fig:intro_poly_rms} the error is 0 in the training test (overfitting) but the error is really high on the test set. the model is not able to generalize.\\
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
-    \includegraphics[scale=0.3]{lectures/1_Introduction/intro_poly_rms.png}
-    \caption{Caption}
+    \includegraphics[scale=0.5]{lectures/1_Introduction/intro_poly_rms.png}
+    \caption{Mean Square Error for different values of $M$ on the test set (red) and on training set (blue).}
     \label{fig:intro_poly_rms}
 \end{figure}
 
 
 \noindent \textbf{Case $l = 15$}:\\
-With a 9th order polynomial model ( $M = 9$) and more data the model seems to get a better generalize for the future data, but still not good. See figure \ref{fig:intro_poly_l_15}.\\
-
+With a 9th order polynomial model ( $M = 9$) and more data the model seems to get a better generalize for the future data, but still not good. See figure \ref{fig:intro_poly_l_15}.
 
 \noindent \textbf{Case $l = 100$}:\\
 With a 9th order polynomial model ( $M = 9$) and more data the model seems to get a better generalize for the future data, but still not good. See figure \ref{fig:intro_poly_l_100}.
 
-
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \subfloat[l = 15]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_poly_l_15.png}\label{fig:intro_poly_l_15}}
   \hfill
@@ -501,9 +550,9 @@ With a 9th order polynomial model ( $M = 9$) and more data the model seems to ge
     \item The role of model complexity
     \item The role of the number of data
 \end{itemize}
-\newpage
-\noindent\textbf{Typical behavior of learning}
-\begin{figure}[H]
+
+\subsection*{Typical behavior of learning}
+\begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.4]{lectures/1_Introduction/intro_behavior_of_learning.png}
 \end{figure}
@@ -520,12 +569,13 @@ Statistical Learning Theory (SLT) is a general theory relating such topics. In a
     \item then search $h$ in $H$ minimizing R
 \end{enumerate}
 But we have only a finite data set: $TR = (\mathbf{x}_i,d_i) \; \forall i = 1, \dots, l$. So we can't use R as minimize risk function. To search $h$, we will minimize the empirical risk (training error), finding the best values for the model free parameters:
-$$ R_{emp} = 1/l \sum_{i = 1}{l}(d_i - h(\mathbf{x}_i))^2$$
-Emprical Risk Minimixzation (ERM) Inductive Principle.\\
+\[
+    R_{emp} = \frac{1}{l} \sum_{i = 1}^{l}(d_i - h(\mathbf{x}_i))^2
+.\] 
+Empirical Risk Minimixzation (ERM) Inductive Principle.
 
-
-\noindent\textbf{Vapnik-Chervonenkis-dim and SLT: a general theory}\\
-we can use $R_{emp}$ to approximate $R$!\\
+\subsubsection*{Vapnik-Chervonenkis-dim and SLT: a general theory}%
+we can use $R_{emp}$ to approximate $R$!
 
 \textbf{VC-dim}: measure complexity of $H$ (flexibility to fit data), e.g. Num. of parameters for polynomials, NN, ...
 
@@ -544,11 +594,14 @@ Concept of control of the model complexity (flexibility): trade-off between mode
     \includegraphics[scale = 0.4]{lectures/1_Introduction/intro_struct_risk.png}
 \end{figure}
 
-Model selection: choose the model (H) with the better bound on the true risk\\
+\begin{definition}[Model selection]
+The model selection consist in choise of the model (H) with the better bound on the true risk.
+\end{definition}
+\begin{example}
+It is possible to derive an upper bound of the ideal error which is valid with probability $(1-\delta)$, delta being arbitrarily small, of the form:
+\end{example}
 
-\noindent\textbf{An example}
-It is possible to derive an upper bound of the ideal error which is valid with probability ($1-\delta$), delta being arbitrarily small, of the form:
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.4]{lectures/1_Introduction/intro_vc_example.png}
 \end{figure}
@@ -591,7 +644,7 @@ Validation phase has two main aims:
     \end{center}
 \end{itemize}
 
-\noindent\textbf{Gold rule}: Keep separation between goals and use separate data sets for this two operation\\
+\noindent\textbf{Gold rule}: Keep separation between goals and use separate data sets for this two operation.
 
 In an ideal world, for validation we should have:
 
@@ -666,7 +719,7 @@ A confusion matrix is a table that is often used to describe the performance of 
 \end{figure}
 The number of correct and incorrect predictions are summarized with count values and broken down by each class. This is the key to the confusion matrix.
 The confusion matrix shows the ways in which your classification model is confused when it makes predictions.
-It gives us insight not only into the errors being made by a classifier but more importantly the types of errors that are being made.\\
+It gives us insight not only into the errors being made by a classifier but more importantly the types of errors that are being made.
 
 Definition of the Terms:
 \begin{itemize}
@@ -681,40 +734,39 @@ Definition of the Terms:
 \noindent\textbf{Classification Rate/Accuracy} is given by the relation:
 $$ \frac{TP + TN}{Total = TP + TN + FP + FN}$$ 
 
-Two importat statistical measures are: \textit{Specificity} and \textit{Sensitivity}.\\
+Two importat statistical measures are: \textit{Specificity} and \textit{Sensitivity}.
 
-\noindent\textbf{Specificity}\\
+\subsubsection*{Specificity}%
 Specificity (also called the true negative rate) measures the proportion of actual negatives that are correctly identified as such (e.g., the percentage of healthy people who are correctly identified as not having the condition).
 $$ Specificity = \frac{TN}{FP + TN} = 1 - FPR $$
-where FPR (fall-out or false positive rate) = $FP/N = FP/(FP + TN)$\\
+where FPR (fall-out or false positive rate) = $FP/N = FP/(FP + TN)$.
 
-
-\noindent\textbf{Sensitivity}\\
+\subsubsection*{Sensitivity}
 Sensitivity (also called the true positive rate, the recall, or probability of detection[1] in some fields) measures the proportion of actual positives that are correctly identified as such (e.g., the percentage of sick people who are correctly identified as having the condition).
 $$ Sensitivity = \frac{TP}{TP + FN}$$
 
-\textbf{NOTE}: for binary classif.: 50\% correctly classified = “coin” (random guess) predictor. Of course could exists trivial classifier with unbalanced data (e.g. 99\% of the data are positive).\\
+\textbf{NOTE}: for binary classif.: 50\% correctly classified = “coin” (random guess) predictor. Of course could exists trivial classifier with unbalanced data (e.g. 99\% of the data are positive).
 
-\noindent\textbf{ROC Curve}\\
-An ROC curve (receiver operating characteristic curve) is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters: Sensitivity (True Positive Rate (TPR)) and False Positive Rate (FPR) (1 - Specificity).\\
+\subsubsection*{ROC Curve}
+An ROC curve (receiver operating characteristic curve) is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters: Sensitivity (True Positive Rate (TPR)) and False Positive Rate (FPR) (1 - Specificity).
 
 Lowering the classification threshold classifies more items as positive, thus increasing both False Positives and True Positives. See figure \ref{fig:intro_roc_curve_1}.
 
-\begin{figure}[H]
+\begin{figure}[ht]
   \centering
   \subfloat[AUC (Area under the ROC Curve)]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_roc_curve_2.png}\label{fig:intro_roc_curve_1}}
   \hfill
   \subfloat[AUC]{\includegraphics[width=0.5\textwidth]{lectures/1_Introduction/intro_roc_curve.png}\label{fig:intro_roc_curve_2}}
   \caption{ROC curve}
 \end{figure}
-\textbf{AUC} stands for "Area under the ROC Curve." and measures the entire two-dimensional area underneath the entire ROC curve (think integral calculus) from (0,0) to (1,1). See figure \ref{fig:intro_roc_curve_2}.\\
+\textbf{AUC} stands for "Area under the ROC Curve." and measures the entire two-dimensional area underneath the entire ROC curve (think integral calculus) from (0,0) to (1,1). See figure \ref{fig:intro_roc_curve_2}.
 
 AUC provides an aggregate measure of performance across all possible classification thresholds. One way of interpreting AUC is as the probability that the model ranks a random positive example more highly than a random negative example.
 
 The diagonal corresponds to the worst classifier (random guessing). Better curves have higher AUC (Area Under the Curve). In $1.0$ we have the perfect classification.
 
 \subsection{The Design Cycle}
-\noindent\textbf{Data collection:} adequately large and representative set of examples for training and test the system\\
+\noindent\textbf{Data collection:} adequately large and representative set of examples for training and test the system
 
 \noindent\textbf{Data representation:} Often the most critical phase for an overall success.
 \begin{itemize}
@@ -726,15 +778,15 @@ The diagonal corresponds to the worst classifier (random guessing). Better curve
 
 \noindent\textbf{Model choice:}
 \begin{itemize}
-    \item statement of the problem
-    \item hypothesis formulation: You must know the limits of applicability of your model
-    \item complexity control
+    \item Statement of the problem.
+    \item Hypothesis formulation: You must know the limits of applicability of your model.
+    \item Complexity control.
 \end{itemize}
-\noindent\textbf{Building of the model (core of ML):} through the learning algorithm using the training data
+\noindent\textbf{Building of the model (core of ML):} through the learning algorithm using the training data.
 
-\noindent\textbf{Evaluation:} performance = predictive accuracy
+\noindent\textbf{Evaluation:} performance = predictive accuracy.
 
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.3]{lectures/1_Introduction/intro_design_cycle.png}
     \caption{Design cycle}
@@ -742,7 +794,7 @@ The diagonal corresponds to the worst classifier (random guessing). Better curve
 \end{figure}
 
 \subsection{Misinterpretations}
-For every statistical models (including Data Mining (DM) applications)\\
+For every statistical models (including Data Mining (DM) applications).
 
 \noindent Causality is (often) assumed and a set of data representative of the phenomena is needed.
 \begin{itemize}
@@ -750,15 +802,13 @@ For every statistical models (including Data Mining (DM) applications)\\
     \item Uninformative input variables $\rightarrow$ poor modeling $\rightarrow$ Poor learning results
 \end{itemize}
 
-
 \noindent Causality cannot be inferred from data analysis alone:
 \begin{itemize}
     \item People in Florida are older(on av.) than in other US states.
     \item Florida climate causes people to live longer ?
 \end{itemize}
 
-
-\noindent May be there is a statistical dependencies for reasons outside the data\\
+\noindent May be there is a statistical dependencies for reasons outside the data.
 
 \noindent More specifically for ML:
 \begin{itemize}

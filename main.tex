@@ -24,18 +24,34 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 
+\usepackage{parskip}
+
 \usepackage{chngcntr}
 \counterwithin{figure}{section}
 
 %citation
 \usepackage{epigraph}
 
-\theoremstyle{definition}
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+
+\theoremstyle{break}
 \newtheorem{definition}{Definition}[section]
- 
+
+\theoremstyle{break}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{break}
+\newtheorem{theorem}{Theorem}[section]
+
+
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
- 
+
+
  
 \title{Machine Learning}
 \author{Alessandro Cudazzo\\ Giulia Volpi}
@@ -94,7 +110,7 @@
 	\clearpage
 \end{titlepage}
 \clearpage
-\clearpage\mbox{}\thispagestyle{empty}\clearpage\setcounter{page}{1}
+\clearpage\thispagestyle{empty}\clearpage\setcounter{page}{1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%       Tittle Page End      %%
@@ -109,11 +125,14 @@
 \begingroup\small
 \leftskip=0.1\textwidth
 \rightskip=\leftskip
-These notes are intended only as support for the study of the subject and as slides side notes. They do not cover the whole program but only a part, to compensate for the missing parts, we recommend the use of slides and books provided by Prof. Micheli for each topic. We hope these notes will help future students and if you find any mistakes or want to help extend these notes, feel free to do so in the GitHub repo.\\
+\noindent These notes are intended only as support for the study of the subject and as slides side notes. They do not cover the whole program but only a part. 
+In order to compensate for the missing parts, we recommend the use of slides and books provided by Prof. Micheli for each topic. 
 
-\noindent \textbf{What you will find here}: Introduction to ML, Linear Model and K-NN, Neural Networks, Validation, Statistical Learning Theory (STL).\\
+We hope these notes will help future students and if you find any mistakes or want to help extend these notes, feel free to do so in the GitHub repo.
 
-\noindent \textbf{What's missing}: Concept Learning, SVM, Bias Variance, Deep Learning (CNN, Deep, Rand), SOM, Bayes Learning, RNN, SDL.\\
+\noindent \textbf{What you will find here}: Introduction to ML, Linear Model and K-NN, Neural Networks, Validation, Statistical Learning Theory (STL).
+
+\noindent \textbf{What's missing}: Concept Learning, SVM, Bias Variance, Deep Learning (CNN, Deep, Rand), SOM, Bayes Learning, RNN, SDL.
 
 \par\endgroup
 %\vspace{\fill}
@@ -133,14 +152,14 @@ These notes are intended only as support for the study of the subject and as sli
 \subfile{lectures/1_Introduction.tex}
 \newpage
 \subfile{lectures/2_linear_model.tex}
-\newpage
-\subfile{lectures/3_k_nn.tex}
-\newpage
-\subfile{lectures/4_neural_networks.tex}
-\newpage
-\subfile{lectures/5_validation.tex}
-\newpage
-\subfile{lectures/6_SLT.tex}
+%\newpage
+%\subfile{lectures/3_k_nn.tex}
+%\newpage
+%\subfile{lectures/4_neural_networks.tex}
+%\newpage
+%\subfile{lectures/5_validation.tex}
+%\newpage
+%\subfile{lectures/6_SLT.tex}
 %\bibliographystyle{plain}
 %\bibliography{references}
 \end{document}
