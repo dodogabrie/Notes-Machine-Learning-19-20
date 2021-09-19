@@ -330,21 +330,109 @@ According to the different paradigms/contexts “learning” can be differently 
 \subsection{Role of inductive bias}%
 In order to set up a model and a learning algorithm we can make
 assumptions (about the nature of the target function) concerning either
-\begin{itemize}
-    \item Constraints in the model (in the hypothesis space H, due to the set of
-	hypotheses that we can express or consider) (Language Bias). For example we can search only on linear function.
-    \item Constraints or preferences in learning algorithm/search strategy (Search Bias). For example we could choose to search only some $\boldsymbol{w}$ for the linear search.
-    \item Or Both.
-\end{itemize}
-We will see that such assumptions are strictly need to obtain an useful model for the ML aims, i.e. a model with generalization capabilities.\\
+\begin{description}
+    \item[Language bias] Constraints in the model (in the hypothesis space H, due to the set of
+	hypotheses that we can express or consider). For example we can search only on linear function.
+    \item[Search bias] Constraints or preferences in learning algorithm/search strategy. For example we could choose to search only some $\boldsymbol{w}$ for the linear search.
+    \item[Both] Search bias and inductive bias together.
+\end{description}
+Such assumptions are strictly need to obtain an useful model for the ML aims ( a model with generalization capabilities ).\\
 We start to discuss it within examples in discrete hypotheses spaces (rules) , learning a concept (a Boolean function) [Mitchell chapt. 2]
-\begin{example}
-x is a “cat” if h cat ( x ) =1, otherwise is 0 for x in “animals”
+\begin{example}[A simple rule]
+    $x$ is a “cat” if $h_{cat}( x ) =1$, otherwise is $0$ for $x$ in “animals”
 \end{example}
+
+\paragraph{Learning a Boolean function}%
+Given a space of boolean variable $x_i$ we can create a number of boolean function equal to $2^{2^n}$. 
 \begin{example}
-    Learning a boolean function (boolean input/output) given the True table \ldots slides 119 and 120
+  Given 4 boolean variable $x_i$, $i = 1,\ldots, 4$ we search in the space of the combination of all possible output.
+  \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{lectures/1_Introduction/learn_bool_func.png}
+  \end{figure}
+  In the table there aren't all the possible combinations of the $x_i$, only 7 examples are given. The task is to infer the output for the other 9 combination but\ldots There are still $2^9$ combination of function that agree with the provided examples! ($2^9 = 2^{16 - 7})$.
 \end{example}
-ADD SLIDES 119---> 128
+This kind of problem is ill posed so the uniqueness of solution is not guaranteed. A learner of this type is called Rote Learner.
+\begin{definition}[Rote Learner]
+    A rote learner is a learning algorithm that stores examples and classify new instances only if they match with a previous observed example.
+    If a new instance doesn't match with any of the preceding instance the rote learning just classify as "I don't know".
+\end{definition}
+
+\paragraph{Cunjuctive Rules}%
+As second example of discrete \textit{Hypotesys Space H} we could imagine to learn a discrete function with discrete inputs assuming cunjunctive rules.
+\begin{example}
+Take this 3 proposition: $l_1 = $"the animal is furry", $l_2 = $"the animal purrs", $l_3=$"the animal is a cat". \\
+The conjunctive rule could be: if ($l_1$ and $l_2$)=True than $l_3=$True, else $l_3=$False. \\
+So the function $h$ is:
+\[
+    h(l_1, l_2, l_3) = 
+    \begin{cases}
+	l_3 & \text{if } l_1 \text{ and } l_2\\
+	\text{not }l_3 & \text{otherwise}
+    \end{cases}
+\] 
+\end{example}
+In this space, given $n$ proposition we can have $3^n + 1$ semantically distinct \textit{Hypoteses} (conjunctions): 
+\begin{itemize}
+    \item $l_i$.
+    \item not $l_i$.
+    \item Don't care.
+\end{itemize}
+We add the +1 because all the $h$ like $(l_i$ and not $l_i$) are equivalent to false.
+
+\subsubsection{Unbiased Learner}%
+\begin{definition}[Consistent Hypotesis]
+    An hypotesis is consistent with the training set TR if $h(\boldsymbol{x}) = d(\boldsymbol{x})$ for each training sample $\left<\boldsymbol{x}, d(\boldsymbol{x}) \right>$.
+\end{definition}
+\begin{definition}[Version Space]
+    The version space VS$_{H, TR}$ is the subset of Hypoteses (respect to the Hypotesis space $H$) consistent with all the training sample of the training set TR.
+\end{definition}
+The version space can be found by clever algorithm described in the book (Mitchell chap. 2).\\
+Using only the conjunctive assumption, like in the previous example, may be too restrictive: if the target concept (or function) is not in $H$ it cannot be represented in $H$.
+\begin{example}[outside target]
+    If ($x_1 = 1$ or $x_2 = 1$) then $h(\boldsymbol{x})=1$ else $h(\boldsymbol{x})= 0$.\\
+    With this Hypotesis space we cannot represent $x_i = 0$.
+\end{example}
+In order to handle this problem we can choose $H$ that express every teachable concept (among proposition). In the conjunctive rules we could choose:
+\[
+    H = \text{disjunctions}, \text{ conjunctions}, \text{ Negations}.
+\] 
+In this way $H$ will surely contains the target concept: in this case $H$ will be an \textbf{Unbiased Learner}. 
+
+\subsubsection{Is an unbiased learner good for Generalization?}%
+The only example that are unanbigously classified by an unbias learner (represented with the VS) is are the training examples themselves.
+
+\begin{theorem}[About unbiased learner]
+    An unbiased learner is unable to Generalize (on new instances).
+\end{theorem}
+\begin{proof}
+    Each unobserved instance will be classified positive by precisely half the hypothesis in VS and negative by the other half ( rejection: no answer is made by the VS for new input instances).\\
+    Indeed, given $x_i$ in the test set:\\
+    $\forall h$ consistent with $x_i$ $\exists h'$ identical to $h$ except $h'(x_i) \neq h(x_i)$, $h' \in $ VS and $h \in $ VS.
+\end{proof}
+So a learner that makes no prior assumptions regarding the identity of the target function/concept has no rational basis for classifying any unseen instances.
+
+\textbf{Important}: bias is not only assumed for efficency but it is \textbf{needed} for the generalization capability.
+
+\subsubsection{Inductive or Deductive System}%
+Inductive systems are equivalent to deductive systems if we insert in our hypotesis the inductive bias. In this way the problem about the classification of new instance makes sense: doing ML we are not inveting crazy useless functions.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{lectures/1_Introduction/dedu_indu_sys.png}
+\end{figure}
+
+\subsubsection{Language or Search bias?}%
+In ML is typically used a flexible approaches (expressive hypothesis spaces, universal capability of the models, e.g. Neural Networks, DT).\\
+Usually we avoid the language bias, hence without excluding a priori the unknown target function. We retain an inductive bias but focusing on the search bias (which is ruled by the learning algorithm).\\
+In practice we will use an incomplete search strategy.
+
+\textbf{Conclusions}:
+\begin{itemize}
+    \item Learning without bias cannot extract any regularities from data (lookup-table: no generalization capabilities).
+    \item Every state-of-the-art ML approach shows an inductive bias.
+    \item Issue: characterize the bias for different models/learning approaches\ldots Is an Inductive Bias better than another?
+\end{itemize}
+
 \subsection{Task + Model = Loss}
 We have to find a  “\textbf{good}” approximation to f from examples. How to measure the quality of the approximation?
 
