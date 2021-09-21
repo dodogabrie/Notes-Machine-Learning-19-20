@@ -555,11 +555,13 @@ set of training examples will also approximate the target function well over any
 This is the fundamental assumption of inductive learning (Supervised learning) (e.g. in concept learning) and we will have much more to say about it.
 
 \begin{definition}[Overfitting]
-A model is in overfitting if it outputs an hypothesis $h(\cdot) \in H$ having true error $\epsilon$ and empirical error $E$, but There is another  $h'(\cdot) \in H$ having $E' > E$ and $\epsilon' < \epsilon$.
+    A model is in overfitting if it outputs an hypothesis $h(\cdot) \in H$ having true/generalization error (risk) $\epsilon$ and empirical (training) error $E$, but There is another  $h'(\cdot) \in H$ having $E' > E$ and $\epsilon' < \epsilon$.
 \end{definition}
+Remember that we are interested in \textbf{generalization capability}, not in \textbf{fit capability}, the first one is given by generalization error $\epsilon$ and the second by the training error $E$.
 
 \subsubsection{Complexity on case of study}
-Let's take an example with a \textbf{parametric model} for regression: \textbf{Polynomial Curve Fitting Example}, with just one variable and we assume to know the target function, see figure \ref{fig:polynomial_curve} and as error function we will use the Sum-of-Squares Error, see figure \ref{fig:sum_of_square_error}.
+Let's take an example with a \textbf{parametric model} for regression: \textbf{Polynomial Curve Fitting Example}.
+We consider just one variable $x$ and we assume to know the target function $h_{\boldsymbol{w}}(x)$ (see figure \ref{fig:polynomial_curve}), as error function we will use the Sum-of-Squares Error (see figure \ref{fig:sum_of_square_error}).
 
 \begin{itemize}
     \item The set of function is assumed as polynomials with degree $M$
@@ -589,7 +591,7 @@ Assume that we have some few data  (figure \ref{fig:polynomial_curve}) and let's
 Let's see some cases:
 \begin{itemize}
     \item M = 0: in this case we are in \textbf{underfitting}, we have a very simple model that cannot fit the data. With M = 0 the model it's just the mean. See figure \ref{fig:intro_poly_0}.
-    \item M = 1: Linear model,  still a model model, dosen't not fit good the data. See figure \ref{fig:intro_poly_1}.
+    \item M = 1: Linear model,  still an underfitting model, dosen't not fit good the data. See figure \ref{fig:intro_poly_1}.
     \item M = 3, this time, the model seems very good, we have a low error. See figure \ref{fig:intro_poly_2}.
     \item M = 9: Too complex model, it's fit the noise too!, the error on the training test is $E(w) = 0$, but error on the test set?  See figure \ref{fig:intro_poly_3}. Poor representation of the (green) true function due to \textbf{overfitting}.
 \end{itemize}
@@ -616,7 +618,14 @@ As we can see in figure \ref{fig:intro_poly_rms} the error is 0 in the training 
     \caption{Mean Square Error for different values of $M$ on the test set (red) and on training set (blue).}
     \label{fig:intro_poly_rms}
 \end{figure}
+Our aim is to stay in the middle of the plot in figure \ref{fig:intro_poly_rms}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{lectures/1_Introduction/overfittingVarM.png}
+    \caption{\ldots}
+    \label{fig:lectures-1_Introduction-overfittingVarM-png}
+\end{figure}
 
 \noindent \textbf{Case $l = 15$}:\\
 With a 9th order polynomial model ( $M = 9$) and more data the model seems to get a better generalize for the future data, but still not good. See figure \ref{fig:intro_poly_l_15}.
@@ -646,40 +655,62 @@ With a 9th order polynomial model ( $M = 9$) and more data the model seems to ge
 \end{figure}
 
 \subsubsection{Toward Statistical Learning Theory (SLT)}
+Riassuming the previous section our goals are:
+\begin{itemize}
+    \item To investigate on \textit{generalization capability} of a model (measured as a risk or test error):
+    \begin{itemize}
+	\item[--] with respect to the train error
+	\item[--] with respect to the overfitting and underfitting zone.
+    \end{itemize}
+\end{itemize}
+We are also interested in the role of the model complexity and the role of the number of data.
+
 Statistical Learning Theory (SLT) is a general theory relating such topics. In a (Simplified) Formal Setting:
 \begin{enumerate}
     \item we want to approximate an unknown function $f(\mathbf{x})$
     
     \item  minimize a risk function:
     $$  R = \int_{}^{} L(d, h(\mathbf{x}))dP(\mathbf{x},d)$$
-    This is the \textbf{True error} over all the data (that we don't have). $d$ is the value from the teacher and $P(x,d)$ the probability distribution. A loss (or cost) function could be for example: $L(h(\mathbf{x}),d) = (d - h(\mathbf{x}))^2$
-    
+    This is the \textbf{True error} over all the data (that we don't have). $d$ is the value from the teacher and $P(x,d)$ the probability distribution of the data. A loss (or cost) function could be for example: $L(h(\mathbf{x}),d) = (d - h(\mathbf{x}))^2$.\\
+    Note that we tipically don't have $P$\ldots
     \item then search $h$ in $H$ minimizing R
 \end{enumerate}
 But we have only a finite data set: $TR = (\mathbf{x}_i,d_i) \; \forall i = 1, \dots, l$. So we can't use R as minimize risk function. To search $h$, we will minimize the empirical risk (training error), finding the best values for the model free parameters:
 \[
     R_{emp} = \frac{1}{l} \sum_{i = 1}^{l}(d_i - h(\mathbf{x}_i))^2
 .\] 
-Empirical Risk Minimixzation (ERM) Inductive Principle.
+This is the Empirical Risk Minimixzation (ERM) (our \textit{Inductive Principle}).
 
 \subsubsection*{Vapnik-Chervonenkis-dim and SLT: a general theory}%
-we can use $R_{emp}$ to approximate $R$!
+We can use $R_{emp}$ to approximate $R$!
 
-\textbf{VC-dim}: measure complexity of $H$ (flexibility to fit data), e.g. Num. of parameters for polynomials, NN, ...
+\begin{definition}[VC-dim]
+    Measure complexity of $H$ (flexibility to fit data), e.g. Num. of parameters for polynomials, NN, ...
+\end{definition}
 
 The Vapnik-Chervonenkis bound (VC-bound(s)) is in the form:
-$$ R \leq R_{emp} + \epsilon(1/l, VC, 1/\delta)\;\; , \;\; \text{with probability } 1 - \delta$$
+\[
+R \leq R_{emp} + \epsilon(1/l, VC, 1/\delta)
+\]
+This equation holds with probability $1-\delta$. We can choose $\delta$ (from the point of machine learning this is not so important).
+
+\textbf{Important} For our point of view the important parameters are $l$: the number of data and VC-dim (like the number of parameters in the model).
+
 where $R_{emp} + \epsilon$ is the \textbf{guaranteed risk} and $\epsilon$ is the \textbf{VC-\textit{confidence}} 
 \begin{itemize}
+    \item $\epsilon$ is a function that grows with VC-dim and decrease with $l$ (number of data) and $\delta$.
     \item Higher $l$ (data): lower R 
     \item Higher VC-dim (fix $l$) : lower $R_{emp}$ but $R$ may increase (overfitting)
 \end{itemize}
+
+Over/under fitting with this\ldots?
 
 \noindent\textbf{Structural Risk Minimization: find a trade-off}
 Concept of control of the model complexity (flexibility): trade-off between model complexity and TR (training) accuracy (fitting).
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.4]{lectures/1_Introduction/intro_struct_risk.png}
+    \caption{\scriptsize Blu+Red=purple, in the figure $l$ is fixed. The purple is the bound of $R$ and not the real $R$ because of the $\le$.}
 \end{figure}
 
 \begin{definition}[Model selection]
@@ -712,7 +743,7 @@ the techniques to perform fitting), apart from modelling aspects
 But there are other open questions: what (other) principles are to found the control of the complexity? How to work in practice? How to measure the complexity (or fitting flexibility)? How find the best trade-off between fitting and model complexity?
 
 \subsection{VALIDATION}
-Evaluate generalization capabilities (of your $h(x)$). \textbf{Warning}: The performance on training data provide an overoptimistic evaluation
+Evaluate generalization capabilities (of your $h(x)$). \textbf{Warning}: The performance on training data provide an overoptimistic evaluation (we have seen "overfitting").
 \begin{center}
     Evaluation of performances for ML systems = Predictive accuracy
 \end{center}
@@ -761,6 +792,8 @@ Partition data set D into training set (TR), validation or selection set (VL) an
     \item VL can be used to select the best model (e.g hyper-parameters tuning)
     \item Test set is not to be used for tuning/selecting the best $h$: it is only for model assessment
 \end{itemize}
+
+\textbf{Don't touch the test set!} If you "come back" to training after testing on TS you are cheating! That's not machine learning\ldots
 
 \subsubsection{Hold out and K-fold cross validation}
 \begin{figure}
@@ -820,7 +853,10 @@ Definition of the Terms:
 \end{itemize}
 
 \noindent\textbf{Classification Rate/Accuracy} is given by the relation:
-$$ \frac{TP + TN}{Total = TP + TN + FP + FN}$$ 
+$$ \frac{TP + TN}{Total} = \frac{TP + TN}{ TP + TN + FP + FN}$$ 
+Accuracy is not a good score for unbalanced dataaset.
+
+\textbf{NOTE}: for binary classif.: 50\% correctly classified = “coin” (random guess) predictor. Of course could exists trivial classifier with unbalanced data (e.g. 99\% of the data are positive).
 
 Two importat statistical measures are: \textit{Specificity} and \textit{Sensitivity}.
 
@@ -833,7 +869,6 @@ where FPR (fall-out or false positive rate) = $FP/N = FP/(FP + TN)$.
 Sensitivity (also called the true positive rate, the recall, or probability of detection[1] in some fields) measures the proportion of actual positives that are correctly identified as such (e.g., the percentage of sick people who are correctly identified as having the condition).
 $$ Sensitivity = \frac{TP}{TP + FN}$$
 
-\textbf{NOTE}: for binary classif.: 50\% correctly classified = “coin” (random guess) predictor. Of course could exists trivial classifier with unbalanced data (e.g. 99\% of the data are positive).
 
 \subsubsection*{ROC Curve}
 An ROC curve (receiver operating characteristic curve) is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters: Sensitivity (True Positive Rate (TPR)) and False Positive Rate (FPR) (1 - Specificity).
@@ -882,27 +917,29 @@ The diagonal corresponds to the worst classifier (random guessing). Better curve
 \end{figure}
 
 \subsection{Misinterpretations}
-For every statistical models (including Data Mining (DM) applications).
+For every statistical models (including Data Mining (DM) applications):
 
-\noindent Causality is (often) assumed and a set of data representative of the phenomena is needed.
 \begin{itemize}
-    \item Not for unrelated variables and for random phenomena (lotteries)
-    \item Uninformative input variables $\rightarrow$ poor modeling $\rightarrow$ Poor learning results
+    \item Causality is (often) assumed and a set of data representative of the phenomena is needed.
+         \begin{itemize}
+	     \item[--] Not for unrelated variables and for random phenomena (lotteries)
+	     \item[--] Uninformative input variables $\rightarrow$ poor modeling $\rightarrow$ Poor learning results
+         \end{itemize}
+    \item Causality cannot be inferred from data analysis alone:
+        \begin{itemize}
+	    \item[--] People in Florida are older(on av.) than in other US states.
+	    \item[--] Florida climate causes people to live longer ?
+        \end{itemize}
+    \item May be there is a statistical dependencies for reasons outside the data.
+    \item More specifically for ML:
+        \begin{itemize}
+	    \item[--] Powerful models (even for “garbage” data) $\rightarrow$ higher risk !
+	    \item[--] Not-well validated results: the predicted outcome and the interpretation can be misleading.
+        \end{itemize}
+
 \end{itemize}
 
-\noindent Causality cannot be inferred from data analysis alone:
-\begin{itemize}
-    \item People in Florida are older(on av.) than in other US states.
-    \item Florida climate causes people to live longer ?
-\end{itemize}
 
-\noindent May be there is a statistical dependencies for reasons outside the data.
-
-\noindent More specifically for ML:
-\begin{itemize}
-    \item Powerful models (even for “garbage” data) $\rightarrow$ higher risk !
-    \item Not-well validated results: the predicted outcome and the interpretation can be misleading.
-\end{itemize}
 
 \end{document}
     
