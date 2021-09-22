@@ -42,7 +42,7 @@ Let's see first how we can formulate the learning problem as a \textbf{Least mea
 A regression task is the process of estimating of a real-value function on the basis of finite set of noisy samples, we have known pairs $(x, f(x) + \text{random noise})$ and we want to find an $h$ (hypothesis) that fit the data. See figure \ref{fig:linear_model_regression_exp}.
 \begin{figure}
     \centering
-    \includegraphics[scale = 0.4]{lectures/2_linear_model/regression_exp.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/regression_exp.png}
     \caption{Regression Example}
     \label{fig:linear_model_regression_exp}
 \end{figure}
@@ -58,15 +58,14 @@ Univariate case, simple linear regression:
     \item we assume a model $h_w(x)$ expressed as:
     $$ h_w(x) = out = w_1x + w_0$$
     where $\mathbf{w}$ are real-valued \textbf{coefficients/free parameters (weights)}.
-    
-    
 \end{itemize}
 
 \begin{center}
     The idea is \textbf{fitting} the data by a  “straight line”.
 \end{center}
 
-In this case we have Infinite hypothesis space (continuous $w$ values) but we have nice solution from classical math (going back to Gauss/Legendre ~1795!). Surprisingly we can “learn” by this basic tool and although simple it include many relevant concept of modern ML and it is
+In this case we have Infinite hypothesis space (continuous $w$ values) but we have nice solution from classical math (going back to Gauss/Legendre ~1795!).\\
+Surprisingly we can “learn” by this basic tool and although simple it include many relevant concept of modern ML and it is
 a basis of evolved methods in the field.\\
 
 \noindent $\Rightarrow$ \textbf{Learning via LMS}:\\
@@ -78,10 +77,10 @@ a basis of evolved methods in the field.\\
 \end{itemize}
 
 As Loss function we will use the square of errors, Least (Mean) Square: find $w$ to minimize the residual sum of squares: $argmin_w \norm{Error(\mathbf{w})}$ 
-
-\[
-Loss(h_\mathbf{w}) = E(\textbf{w}) = \sum_{p = 1}^{l} (y_p - h_\mathbf{w}(x_p))^2 = \sum_{p = 1}^{l} (y_p - (w_1x_p + w_0))^2
-\]
+\[\begin{aligned}
+    Loss(h_\mathbf{w}) = E(\textbf{w}) &= \sum_{p = 1}^{l} (y_p - h_\mathbf{w}(x_p))^2 =\\
+                            &=\sum_{p = 1}^{l} (y_p - (w_1x_p + w_0))^2
+.\end{aligned}\]
 Where $x_p$ is p-th input/patter/example, $y_p$ the output for $p$, $w$ free par., $l$ num. of examples\\
 
 \textbf{Note}: 
@@ -95,11 +94,13 @@ The method of least squares is a standard approach to the approximate solution o
     \includegraphics[scale = 0.5]{lectures/2_linear_model/learning_lms.png}
 \end{figure}
 
+\textbf{Note}: Why the mean square error with the $L_2$ norm? Because is a differentiable function that gives always positive values.
+
 \noindent $\Rightarrow$ \textbf{How to solve?}:\\
 Remember: local minimum as stationary point: the gradient is null:
 $$ \frac{\partial E(\mathbf{w})}{\partial{w_i}} = 0 \; , \; i = 1, \dots,  \text{dim\_input}+1 = 1, \dots,  n+1$$
 For the simple Lin. Regr. (2 free parameters):
-$$ \frac{\partial E(\mathbf{w})}{\partial{w_i}} = 0 \; , \; \frac{\partial E(\mathbf{w_0})}{\partial{w_1}} = 0 $$
+$$ \frac{\partial E(\mathbf{w})}{\partial{w_i}} = 0 \qquad \qquad \frac{\partial E(\mathbf{w_0})}{\partial{w_1}} = 0 $$
 
 \begin{figure}
     \centering
@@ -113,10 +114,9 @@ We have a convex loss function, so there is no local minima and there is a close
     \centering
     \includegraphics[scale = 0.4]{lectures/2_linear_model/solution_regression_two_par.png}
 \end{figure}
+It isn't mandatory to memorize this formula \textbf{but} for exercise try to reproduce the math to arrive there\ldots
 
 Let's compute the gradient for 1 (each) patter p:
-
-
 
 \begin{equation*}\label{eq:pareto mle2}
     \begin{aligned}
@@ -127,17 +127,19 @@ Let's compute the gradient for 1 (each) patter p:
 \end{equation*}
 
 and we will have:
-$$
-\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2(y - h_{\mathbf{w}}(x)) \; \; , \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2(y - h_{\mathbf{w}}(x))x
-$$
+\[
+\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2(y - h_{\mathbf{w}}(x))  \qquad;\qquad \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2(y - h_{\mathbf{w}}(x))x
+.\] 
 then we will sum up for l patterns $(x_p,y_p)$:
-$$
-\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p)) \; \; ,\; \; \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p))x_p
-$$
+\[
+\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p)) \qquad;\qquad \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p))x_p
+.\] 
 
 \subsubsection{Linear Regression with multidimensional inputs case}
 Assuming column vector $\mathbf{x},\, \mathbf{w} \in \mathbb{R}^n$, number of data $l$:
-$$ \mathbf{w}^T\mathbf{x} + w_0 = w_0 +w_1 x_1 + w_2 x_2 + \dots + w_n x_n$$
+$$
+\mathbf{w}^T\mathbf{x} + w_0 = w_0 +w_1 x_1 + w_2 x_2 + \dots + w_n x_n = w_0 + \sum_{i=1}^{n} w_i x_i
+$$
 Note:
 \begin{itemize}
     \item that often (in NN), as before, the transpose notation T in $w^T$ is omitted
@@ -177,9 +179,9 @@ The same models (used for regression) can be used for classification: categorica
 
 We define an hyperplaen: $\mathbf{w}^T\mathbf{x}$, see figure \ref{fig:2_hyperplane} where our hyperplane is:
 $$ \mathbf{w}^T\mathbf{x} = w_1x_1 + w_2x_2 +w_0 = 0$$
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
-    \includegraphics[scale = 0.3]{lectures/2_linear_model/2_hyperplane.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/2_hyperplane.png}
     \caption{Geometrical view: hyperplane}
     \label{fig:2_hyperplane}
 \end{figure}
@@ -195,9 +197,9 @@ In case of $w_0$ included in $\mathbf{w}$:
 $$ h(\mathbf{x}_p) = sign(\mathbf{x}^T_p\mathbf{w}) = sign(\sum_{i = 0}^{n}x_{p,i}w_i)$$
 
 \noindent A Geometrical view of our classifier is shown in figur \ref{fig:2_hyperplane_classifier}
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
-    \includegraphics[scale = 0.2]{lectures/2_linear_model/2_hyperplane_classifier.png}
+    \includegraphics[scale = 0.3]{lectures/2_linear_model/2_hyperplane_classifier.png}
     \caption{Geometrical view: hyperplane}
     \label{fig:2_hyperplane_classifier}
 \end{figure}
@@ -205,14 +207,15 @@ $$ h(\mathbf{x}_p) = sign(\mathbf{x}^T_p\mathbf{w}) = sign(\sum_{i = 0}^{n}x_{p,
 \noindent \textbf{Classification by linear decision boundary}:\\
 The classification may be viewed as the allocation of the input space in decision regions (e.g. 0/1) and the linear decision boundary can solve a linearly separable problem.
 
-\textbf{Example}: linear separator on 2-dim instance space where our hypothesis space is composed by all the possible hyperplane (how the weight ($\mathbf{w}$) change).
+\begin{example}
+    Linear separator on 2-dim instance space where our hypothesis space is composed by all the possible hyperplane (how the weight ($\mathbf{w}$) change).
 $$\mathbf{x} = (x_1, x_2) \in \mathbb{R}^2 \;,\; f(x) = 0/1 \; \text{(or  -1/+1)}$$
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.3]{lectures/2_linear_model/2_linear_decision_boundary.png}
 \end{figure}
-
-In general the solution is not unique: there are many possible hyperplanes separating, let's see some hyperplane properties and how the hyperplane change with different $\mathbf{w}$ values.\\
+\end{example}
+In general the solution is not unique: there are many possible hyperplanes separating, let's see some hyperplane properties and how the hyperplane change with different $\mathbf{w}$ values.
 
 \textbf{Hyperplane properties}:
 \begin{figure}[H]
@@ -227,19 +230,35 @@ In general the solution is not unique: there are many possible hyperplanes separ
 \end{itemize}
 Here two examples:
 
-\noindent \textbf{(AIMA) Classify a new data ($x_1,x_2$)}
+\textbf{(AIMA) Classify a new data ($x_1,x_2$)}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.4]{lectures/2_linear_model/2_example_clas_1.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/2_example_clas_1.png}
 \end{figure}
 
 \textbf{Spam}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.4]{lectures/2_linear_model/2_example_clas_2.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/2_example_clas_2.png}
 \end{figure}
 
-
+\subsubsection{Property of the Hyperplane}%
+\begin{itemize}
+    \item If w 0 =0 the line goes through the
+    \item If n > 2 → hyperplane (decision boundary)
+    \item Scaling freedom : the same hyperplane multiplying w by K
+    \item w is a vector orthogonal to the hyperplane:\\
+	Given $x_1, x_2$ (belonging to separate hyperplane):
+	\[
+	    w^tx_1 + w_0 = 0 \qquad w^tx_2 + w_0 = 0
+	.\] 
+	From the different of this two equation we have:
+	\[
+	    w^t (x_1-x_2) = 0
+	.\] 
+	So the vector are ortogonal.
+    \item The Hyperplane of the solution is not unique.
+\end{itemize}
 
 \newpage
 \subsection{Learning Algorithms}
@@ -285,7 +304,8 @@ $$ E(\bold{w}) = 1/l \sum_{i = 1}^{l} (y_i - \bold{x}_i^T\bold{w})^2 = \left\lVe
     Min error: if $y_i=1$ then $x_i^Tw\rightarrow 1$ ; if $y_i=0$ then  $x_i^Tw\rightarrow 0$
 \end{center} 
 
-In $E(\bold{W})$ we do not use $h(\bold{x})$, as for regression, but to hold a continuous differentiable loss (because $h(\bold{x})=sign(\bold{wx})$ for classification) we will use $\bold{x}_i^T\bold{w}$\\
+\textbf{Important}: In $E(\bold{W})$ we do not use $h(\bold{x})$, as for regression, but to hold a continuous differentiable loss (because $h(\bold{x})=sign(\bold{wx})$ for classification) we will use $\bold{x}_i^T\bold{w}$
+
 This is a \emph{quadratic function} so the minimum always exists (but may be not unique).\\
 ($X$ is a matrix $\bold{l\, x\, n}$ with a row for each input vector $\bold{x}_i$).
 
@@ -319,10 +339,11 @@ Else the solution are infinite (satisfying the normal equation):
 
 \noindent \textbf{Direct approach by SVD}:\\
 The Singular Value Decomposition can be used for computing the pseudoinverse of a matrix:
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.2]{lectures/2_linear_model/2_direct_svd.png}
-\end{figure}
+\[
+    \boldsymbol{X} = \boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^T \implies  \boldsymbol{X}^+ = \boldsymbol{V}\boldsymbol{\Sigma}^+\boldsymbol{U}^T
+.\] 
+Where $\boldsymbol{\Sigma}$ are the diagonals values.
+
 Moreover we can apply directly SVD to compute $ \mathbf{w =X^+y} $ obtaining the minimal norm (on w) solution of least squares problem.
 \subsubsection{Gradient descent}
 An iterative approach based on  \emph{gradient descent}.\\
