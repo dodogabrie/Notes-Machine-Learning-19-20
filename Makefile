@@ -9,3 +9,6 @@ ML1920.pdf: main.tex lectures/1_introduction.tex lectures/2_linear_model.tex lec
 
 clean:
 	rm -f *.aux *.log *.out *.toc
+
+open:
+	xdg-open ML1920.pdf
