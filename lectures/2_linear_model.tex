@@ -68,7 +68,7 @@ In this case we have Infinite hypothesis space (continuous $w$ values) but we ha
 Surprisingly we can “learn” by this basic tool and although simple it include many relevant concept of modern ML and it is
 a basis of evolved methods in the field.
 
-\noindent $\Rightarrow$ \textbf{Learning via LMS}:\\
+\subsubsection*{Learning via LMS}
 \textbf{Learn}: means find the $\textbf{w}$ such that minimize error/empirical loss (bestdata fitting – on the training set with $l$ examples).
 
 \begin{itemize}
@@ -230,7 +230,7 @@ In general the solution is not unique: there are many possible hyperplanes separ
     \item The best Hyperplane (the solution) is not unique.
 \end{itemize}
 
-\subsubsection{Role of Threshold $w_0$}%
+\subsubsection{Role of Threshold}%
 Consider the bias $w_0$ in the LTU (Linear Threshold Unit). Asking for:
 \[
     h(\v{x}) = \v{w}^T\v{x} + w_0 \ge 0
@@ -547,18 +547,15 @@ It show that even for a “simple” model there are many possibilities. We stil
 \subsection{Limitations}
 This linear model has some limitation: It's a \textbf{rigid model}.
 
-\noindent$\blacksquare$ \textbf{Regression tasks for non linear problems}
+\subsubsection*{Regression tasks for non linear problems}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{lectures/1_Introduction/intro_poly_1}
+    \caption{\scriptsize In this case we have a very poor solution, a linear model can't fit a non linear problem! we have to find a solution for it!}
+    \label{fig:2task_poor}
+\end{figure}
 
-\begin{minipage}{0.5\textwidth}
-In this case we have a very poor solution, a linear model can't fit a non linear problem! we have to find a solution for it!
-\end{minipage}
-\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[width=\linewidth]{lectures/1_Introduction/intro_poly_1}
-\end{minipage}
-\newpage
-
-\noindent$\blacksquare$\textbf{Classification tasks}
+\subsubsection*{Classification tasks and non linear problem}
 \begin{itemize}
     \item In geometry, two set of points in a two-dimensional plot are \textbf{linearly separable} when the two sets of points can be completely separated by a single line.
     \item In general, two groups are linearly separable in $n-dimensional$ space if they can be separated by an $(n-1)-dimensional$ hyperplane.
@@ -631,16 +628,33 @@ For \emph{classification task} we add sign before the sum.
 
 \subsection{Improvements}
 \subsubsection{How to control model complexity? Regularization}
-\noindent$\blacksquare$\textbf{Ridge regression (Tikhonov regularization)}\\
+\paragraph{Ridge regression (Tikhonov regularization)}
 smoothed model $\rightarrow$ e.g. lower variance
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.3]{lectures/2_linear_model/tikhonov.png}
-    \caption{Figura sbagliata\ldots}
-    \label{fig:2_tikhonov}
+    \includegraphics[scale = 0.5]{lectures/2_linear_model/tikhonov.png}
 \end{figure}
 \textbf{Note}: For the objective function we use here the name Loss (used for the model training cost function) to distinguish from the Error E (useful to evaluate the model error and used for the data term inside this Loss).\\
 Hence, differently from previous assumptions the two terms are not more equivalent in our use (in the course).
+
+\subsubsection*{Tikhonov and SLT (statistical learning theory)}%
+The penality term $\lambda$ penalizes high values of the weights $w_i$:
+\begin{itemize}
+    \item Tends to \textbf{drive} all the \textbf{weights to smaller values}.
+    \item Implements a control of the model complexity.
+    \item Leads to a model with \textbf{lower VC-dim} with a trade-off obtained through just a controllable parameter $\lambda$.
+\end{itemize}
+
+\begin{exercise}
+    connect tikhonov regularization to the SLT and see:
+    \begin{itemize}
+        \item Why this can help to have a better bound on $R$?
+	\item How $\lambda$ values can rule the under/over fitting cases?
+    \end{itemize}
+\end{exercise}
+\begin{exercise}
+    Derive the new learning rule with weight decay using the Tikhonov loss (computing again the partial derivatives of $L$  with respect to $w$ )
+\end{exercise}
 
 \textbf{Lambda ($\lambda$) regularization parameter}: 
 $$ 0\leq \lambda < 1$$
