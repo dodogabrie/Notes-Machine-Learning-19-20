@@ -2,7 +2,7 @@
 \begin{document}
 
 \section{Linear models}
-In this section we will going to analyze a linear model for classification and regression (Supervised Learning) both as task in function approximation. \\
+In this section we will going to analyze a linear model for classification and regression (Supervised Learning) both as task in function approximation. 
 
 This is a \textbf{Parametric model}: A learning model that summarizes data with a set of parameters of fixed size (independent of the number of training examples) is called a parametric model.
 \begin{itemize}
@@ -26,23 +26,23 @@ Here some Data notation in figure \ref{fig:data_notation}:
     \label{fig:data_notation}
 \end{figure}
 
-Now will we start to see linear models for Regression and classification where the H (hypothesis space is linear). Same model can be applied for both tasks and we will see how.\\
+Now will we start to see linear models for Regression and classification where the H (hypothesis space is linear). Same model can be applied for both tasks and we will see how.
 
 \begin{flushright}
-\textit{"Despite the great inroads made by modern nonparametric regression techniques, linear models remain important, and so we need to understand them well."} (Hastie)\\
+\textit{"Despite the great inroads made by modern nonparametric regression techniques, linear models remain important, and so we need to understand them well."} (Hastie)
 \end{flushright}
 
-The linear model has been the mainstay of statistics and has a lot of studies and in many books (mathematics, statistics, numerical analysis, applicative fields, ML, ...). This model is also used/included in more complex models.\\
+The linear model has been the mainstay of statistics and has a lot of studies and in many books (mathematics, statistics, numerical analysis, applicative fields, ML, ...). This model is also used/included in more complex models.
 
 We will start with the simplest form: linear in the input variables.
 
 \subsection{Regression}
-Let's see first how we can formulate the learning problem as a \textbf{Least mean square (LMS)} problem and let's start to see it in a simplified setting: \textbf{univariate case}.\\
+Let's see first how we can formulate the learning problem as a \textbf{Least mean square (LMS)} problem and let's start to see it in a simplified setting: \textbf{univariate case}.
 
 A regression task is the process of estimating of a real-value function on the basis of finite set of noisy samples, we have known pairs $(x, f(x) + \text{random noise})$ and we want to find an $h$ (hypothesis) that fit the data. See figure \ref{fig:linear_model_regression_exp}.
 \begin{figure}
     \centering
-    \includegraphics[scale = 0.4]{lectures/2_linear_model/regression_exp.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/regression_exp.png}
     \caption{Regression Example}
     \label{fig:linear_model_regression_exp}
 \end{figure}
@@ -58,18 +58,17 @@ Univariate case, simple linear regression:
     \item we assume a model $h_w(x)$ expressed as:
     $$ h_w(x) = out = w_1x + w_0$$
     where $\mathbf{w}$ are real-valued \textbf{coefficients/free parameters (weights)}.
-    
-    
 \end{itemize}
 
 \begin{center}
     The idea is \textbf{fitting} the data by a  “straight line”.
 \end{center}
 
-In this case we have Infinite hypothesis space (continuous $w$ values) but we have nice solution from classical math (going back to Gauss/Legendre ~1795!). Surprisingly we can “learn” by this basic tool and although simple it include many relevant concept of modern ML and it is
-a basis of evolved methods in the field.\\
+In this case we have Infinite hypothesis space (continuous $w$ values) but we have nice solution from classical math (going back to Gauss/Legendre ~1795!).\\
+Surprisingly we can “learn” by this basic tool and although simple it include many relevant concept of modern ML and it is
+a basis of evolved methods in the field.
 
-\noindent $\Rightarrow$ \textbf{Learning via LMS}:\\
+\subsubsection*{Learning via LMS}
 \textbf{Learn}: means find the $\textbf{w}$ such that minimize error/empirical loss (bestdata fitting – on the training set with $l$ examples).
 
 \begin{itemize}
@@ -78,11 +77,11 @@ a basis of evolved methods in the field.\\
 \end{itemize}
 
 As Loss function we will use the square of errors, Least (Mean) Square: find $w$ to minimize the residual sum of squares: $argmin_w \norm{Error(\mathbf{w})}$ 
-
-\[
-Loss(h_\mathbf{w}) = E(\textbf{w}) = \sum_{p = 1}^{l} (y_p - h_\mathbf{w}(x_p))^2 = \sum_{p = 1}^{l} (y_p - (w_1x_p + w_0))^2
-\]
-Where $x_p$ is p-th input/patter/example, $y_p$ the output for $p$, $w$ free par., $l$ num. of examples\\
+\[\begin{aligned}
+    Loss(h_\mathbf{w}) = E(\textbf{w}) &= \sum_{p = 1}^{l} (y_p - h_\mathbf{w}(x_p))^2 =\\
+                            &=\sum_{p = 1}^{l} (y_p - (w_1x_p + w_0))^2
+.\end{aligned}\]
+Where $x_p$ is p-th input/patter/example, $y_p$ the output for $p$, $w$ free par., $l$ num. of examples.
 
 \textbf{Note}: 
 \begin{itemize}
@@ -95,11 +94,13 @@ The method of least squares is a standard approach to the approximate solution o
     \includegraphics[scale = 0.5]{lectures/2_linear_model/learning_lms.png}
 \end{figure}
 
+\textbf{Note}: Why the mean square error with the $L_2$ norm? Because is a differentiable function that gives always positive values.
+
 \noindent $\Rightarrow$ \textbf{How to solve?}:\\
 Remember: local minimum as stationary point: the gradient is null:
 $$ \frac{\partial E(\mathbf{w})}{\partial{w_i}} = 0 \; , \; i = 1, \dots,  \text{dim\_input}+1 = 1, \dots,  n+1$$
 For the simple Lin. Regr. (2 free parameters):
-$$ \frac{\partial E(\mathbf{w})}{\partial{w_i}} = 0 \; , \; \frac{\partial E(\mathbf{w_0})}{\partial{w_1}} = 0 $$
+$$ \frac{\partial E(\mathbf{w})}{\partial{w_i}} = 0 \qquad \qquad \frac{\partial E(\mathbf{w_0})}{\partial{w_1}} = 0 $$
 
 \begin{figure}
     \centering
@@ -113,10 +114,9 @@ We have a convex loss function, so there is no local minima and there is a close
     \centering
     \includegraphics[scale = 0.4]{lectures/2_linear_model/solution_regression_two_par.png}
 \end{figure}
+It isn't mandatory to memorize this formula \textbf{but} for exercise try to reproduce the math to arrive there\ldots
 
 Let's compute the gradient for 1 (each) patter p:
-
-
 
 \begin{equation*}\label{eq:pareto mle2}
     \begin{aligned}
@@ -127,17 +127,19 @@ Let's compute the gradient for 1 (each) patter p:
 \end{equation*}
 
 and we will have:
-$$
-\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2(y - h_{\mathbf{w}}(x)) \; \; , \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2(y - h_{\mathbf{w}}(x))x
-$$
+\[
+\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2(y - h_{\mathbf{w}}(x))  \qquad;\qquad \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2(y - h_{\mathbf{w}}(x))x
+.\] 
 then we will sum up for l patterns $(x_p,y_p)$:
-$$
-\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p)) \; \; ,\; \; \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p))x_p
-$$
+\[
+\frac{\partial E(\mathbf{w})}{\partial{w_0}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p)) \qquad;\qquad \frac{\partial E(\mathbf{w})}{\partial{w_1}} = -2\sum_{p = 1}^{l}(y_p - h_{\mathbf{w}}(x_p))x_p
+.\] 
 
 \subsubsection{Linear Regression with multidimensional inputs case}
 Assuming column vector $\mathbf{x},\, \mathbf{w} \in \mathbb{R}^n$, number of data $l$:
-$$ \mathbf{w}^T\mathbf{x} + w_0 = w_0 +w_1 x_1 + w_2 x_2 + \dots + w_n x_n$$
+$$
+\mathbf{w}^T\mathbf{x} + w_0 = w_0 +w_1 x_1 + w_2 x_2 + \dots + w_n x_n = w_0 + \sum_{i=1}^{n} w_i x_i
+$$
 Note:
 \begin{itemize}
     \item that often (in NN), as before, the transpose notation T in $w^T$ is omitted
@@ -161,9 +163,9 @@ or by a mixture of different low variance gaussian distributions)}
     \label{fig:2_classification_example_problem}
 \end{figure}
 We have 200 points generated in $\mathbb{R}^2$ from an unknown distribution, 100 in each of
-two classes and we want to build a rule to predict the color of future points.\\
+two classes and we want to build a rule to predict the color of future points.
 
-\noindent \textbf{We reuse the linear model for the classification task}:\\
+\noindent \textbf{We reuse the linear model for the classification task}:
 
 The same models (used for regression) can be used for classification: categorical targets, e.g. $0/1$ or $-1/+1$
 
@@ -173,13 +175,13 @@ The same models (used for regression) can be used for classification: categorica
     \item So we want to set $\mathbf{w}$ (by learning) s.t. we get good classification accuracy
 \end{itemize}
 
-\noindent \textbf{Geometrical view: hyperplane}:\\
+\noindent \textbf{Geometrical view: hyperplane}:
 
 We define an hyperplaen: $\mathbf{w}^T\mathbf{x}$, see figure \ref{fig:2_hyperplane} where our hyperplane is:
 $$ \mathbf{w}^T\mathbf{x} = w_1x_1 + w_2x_2 +w_0 = 0$$
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
-    \includegraphics[scale = 0.3]{lectures/2_linear_model/2_hyperplane.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/2_hyperplane.png}
     \caption{Geometrical view: hyperplane}
     \label{fig:2_hyperplane}
 \end{figure}
@@ -195,9 +197,9 @@ In case of $w_0$ included in $\mathbf{w}$:
 $$ h(\mathbf{x}_p) = sign(\mathbf{x}^T_p\mathbf{w}) = sign(\sum_{i = 0}^{n}x_{p,i}w_i)$$
 
 \noindent A Geometrical view of our classifier is shown in figur \ref{fig:2_hyperplane_classifier}
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
-    \includegraphics[scale = 0.2]{lectures/2_linear_model/2_hyperplane_classifier.png}
+    \includegraphics[scale = 0.3]{lectures/2_linear_model/2_hyperplane_classifier.png}
     \caption{Geometrical view: hyperplane}
     \label{fig:2_hyperplane_classifier}
 \end{figure}
@@ -205,14 +207,15 @@ $$ h(\mathbf{x}_p) = sign(\mathbf{x}^T_p\mathbf{w}) = sign(\sum_{i = 0}^{n}x_{p,
 \noindent \textbf{Classification by linear decision boundary}:\\
 The classification may be viewed as the allocation of the input space in decision regions (e.g. 0/1) and the linear decision boundary can solve a linearly separable problem.
 
-\textbf{Example}: linear separator on 2-dim instance space where our hypothesis space is composed by all the possible hyperplane (how the weight ($\mathbf{w}$) change).
+\begin{example}
+    Linear separator on 2-dim instance space where our hypothesis space is composed by all the possible hyperplane (how the weight ($\mathbf{w}$) change).
 $$\mathbf{x} = (x_1, x_2) \in \mathbb{R}^2 \;,\; f(x) = 0/1 \; \text{(or  -1/+1)}$$
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.3]{lectures/2_linear_model/2_linear_decision_boundary.png}
 \end{figure}
-
-In general the solution is not unique: there are many possible hyperplanes separating, let's see some hyperplane properties and how the hyperplane change with different $\mathbf{w}$ values.\\
+\end{example}
+In general the solution is not unique: there are many possible hyperplanes separating, let's see some hyperplane properties and how the hyperplane change with different $\mathbf{w}$ values.
 
 \textbf{Hyperplane properties}:
 \begin{figure}[H]
@@ -224,24 +227,38 @@ In general the solution is not unique: there are many possible hyperplanes separ
     \item If $n > 2 \;\; \rightarrow \;\;$ hyperplane 
     \item Scaling freedom: the same hyperplane multiplying $\mathbf{w}$ by K
     \item $\mathbf{w}$ is a vector orthogonal to the hyperplane, given $\mathbf{x_a}, \mathbf{x_b}$ (belonging to the hyperplane): $$\mathbf{x_a^Tw}+w_0=0 \;;\; \mathbf{x_a^Tw}+w_0=0 \rightarrow \mathbf{w^T}(\mathbf{x_a- x_b})=0 \rightarrow \text{orthogonal vectors}$$
+    \item The best Hyperplane (the solution) is not unique.
 \end{itemize}
+
+\subsubsection{Role of Threshold}%
+Consider the bias $w_0$ in the LTU (Linear Threshold Unit). Asking for:
+\[
+    h(\v{x}) = \v{w}^T\v{x} + w_0 \ge 0
+.\] 
+Is the same that:
+\[
+    h(\v{x}) = \v{w}^T\v{x} \ge -w_0
+.\] 
+Wich $-w_0$ is now assumed as the "threshold" value.
+\begin{itemize}
+    \item The two form identify the same positive zone of the classifier.
+    \item The second form emphatizes the role of the bias as threshold value to "activate" the $+1$ output of the classifier.
+\end{itemize}
+
 Here two examples:
 
-\noindent \textbf{(AIMA) Classify a new data ($x_1,x_2$)}
+\textbf{(AIMA) Classify a new data ($x_1,x_2$)}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.4]{lectures/2_linear_model/2_example_clas_1.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/2_example_clas_1.png}
 \end{figure}
 
 \textbf{Spam}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.4]{lectures/2_linear_model/2_example_clas_2.png}
+    \includegraphics[scale = 0.6]{lectures/2_linear_model/2_example_clas_2.png}
 \end{figure}
 
-
-
-\newpage
 \subsection{Learning Algorithms}
 A learning algorithm is divided into two types:
 \begin{itemize}
@@ -258,42 +275,43 @@ We are going to introduce 2 \emph{learning algorithms} for the regression and fo
 The learning algorithm has 
 
 
-We start redefining the learning problem and the loss for them (for l data and multidimensional inputs).\\
-\newline
+We start redefining the learning problem and the loss for them (for l data and multidimensional inputs).
+
 \textbf{The learning problem (classification tasks)}\\
 \textbf{Given} a set of $l$ training example $( \mathbf{x}_i, y_i)$ and a loss function (measure) $L$, we want to \textbf{find} the weight vector $\textbf{w}$ that minimizes the expected loss on the training data.
 
-$$ R_{emp} = 1/l\sum_{i = 1}^{l} L(h(\mathbf{x}_i),y_i) $$
+$$ R_{emp} = \frac{1}{l}\sum_{i = 1}^{l} L(h(\mathbf{x}_i),y_i) $$
 
-For classification: Using a piecewise constant (over $sign(\mathbf{w^Tx})$ ) for the loss can make this a difficult problem because it is not continuous and differentiable. Assume we still use the least squares (as for the regression case).\\
+For classification: Using a piecewise constant (over $sign(\mathbf{w^Tx})$ ) for the loss can make this a difficult problem because it is not continuous and differentiable. Assume we still use the least squares (as for the regression case).
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.3]{lectures/2_linear_model/2_loss_classification_smo.png}
-    \caption{Both satisfies the minimization of error}
+    \caption{\scriptsize Example of Loss for the classifiation of a Positive instance. Both Loss satisfies the minimization of error.}
     \label{fig:2_loss_classification_smo}
 \end{figure}
-Initially, we can make the optimization problem easier by replacing the original objective function \textbf{L} by a smooth, differentiable function. For example, consider the mean squared error. See figure \ref{fig:2_loss_classification_smo}.\\
+Initially, we can make the optimization problem easier by replacing the original objective function \textbf{L} by a smooth, differentiable function. For example, consider the mean squared error. See figure \ref{fig:2_loss_classification_smo}.
 
-\noindent \textbf{Learning (a classifier) by Least Squares}:\\
+\noindent \textbf{Learning (a classifier) by Least Squares}:
 
 \noindent\textbf{Given} a set of $l$ training example $( \mathbf{x}_i, y_i)$, \textbf{Find} optimal values for w (for fitting of Training data) by using the \textbf{least squares} that minimize the residual sum of squares:
 
-$$ E(\bold{w}) = 1/l \sum_{i = 1}^{l} (y_i - \bold{x}_i^T\bold{w})^2 = \left\lVert\bold{y} - \bold{Xw} \right\rVert ^2$$
+$$ E(\mathbf{w}) = 1/l \sum_{i = 1}^{l} (y_i - \mathbf{x}_i^T\mathbf{w})^2 = \left\lVert\mathbf{y} - \mathbf{Xw} \right\rVert ^2$$
 
 \begin{center}
     Min error: if $y_i=1$ then $x_i^Tw\rightarrow 1$ ; if $y_i=0$ then  $x_i^Tw\rightarrow 0$
 \end{center} 
 
-In $E(\bold{W})$ we do not use $h(\bold{x})$, as for regression, but to hold a continuous differentiable loss (because $h(\bold{x})=sign(\bold{wx})$ for classification) we will use $\bold{x}_i^T\bold{w}$\\
+\textbf{Important}: In $E(\mathbf{W})$ we do not use $h(\mathbf{x})$, as for regression, but to hold a continuous differentiable loss (because $h(\mathbf{x})=sign(\mathbf{wx})$ for classification) we will use $\mathbf{x}_i^T\mathbf{w}$
+
 This is a \emph{quadratic function} so the minimum always exists (but may be not unique).\\
-($X$ is a matrix $\bold{l\, x\, n}$ with a row for each input vector $\bold{x}_i$).
+($X$ is a matrix $\mathbf{l\, x\, n}$ with a row for each input vector $\mathbf{x}_i$).
 
 \subsubsection{Normal equation and direct approach solution}
-Differentiating $E(\mathbf{w})$ with respect to $\mathbf{w}$ we get the normal equation (point with gradient of E w.r.t $\bold{w} =0$):
+Differentiating $E(\mathbf{w})$ with respect to $\mathbf{w}$ we get the normal equation (point with gradient of E w.r.t $\mathbf{w} =0$):
 $$ \mathbf{(X^TX)w = X^Ty}$$
 
-\begin{proof} Now we want to compute $\frac{\partial E(\mathbf{w})}{\mathbf{w}_j} = 0 \;\; , \;\; j = 0, \dots, n$\\
+\begin{proof} Now we want to compute $\frac{\partial E(\mathbf{w})}{\mathbf{w}_j} = 0 \;\; , \;\; j = 0, \dots, n$
 
 $E(\mathbf{w}) = \sum_{i = 1}^{l}(y_i - \sum_{t = 0}^{n} w_t x_{i,t} )^2 =  \sum_{i = 1}^{l} (\delta_i(\mathbf{w}))^2 \;\;   \text{($l$ patterns)}$
 
@@ -315,51 +333,56 @@ Else the solution are infinite (satisfying the normal equation):
     we can choose the min norm (w) solution.
 \end{center}
 
-\noindent\textbf{note}: ($\mathbf{X}^+$ is the Moore-Penrose pseudoinverse also if X is not invertible)\\
+\noindent\textbf{note}: ($\mathbf{X}^+$ is the Moore-Penrose pseudoinverse also if X is not invertible)
 
 \noindent \textbf{Direct approach by SVD}:\\
 The Singular Value Decomposition can be used for computing the pseudoinverse of a matrix:
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.2]{lectures/2_linear_model/2_direct_svd.png}
-\end{figure}
+\[
+    \boldsymbol{X} = \boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^T \implies  \boldsymbol{X}^+ = \boldsymbol{V}\boldsymbol{\Sigma}^+\boldsymbol{U}^T
+.\] 
+Where $\boldsymbol{\Sigma}$ are the diagonals values.
+
 Moreover we can apply directly SVD to compute $ \mathbf{w =X^+y} $ obtaining the minimal norm (on w) solution of least squares problem.
 \subsubsection{Gradient descent}
-An iterative approach based on  \emph{gradient descent}.\\
+An iterative approach based on  \emph{gradient descent}:
 Previous derivation suggest the line to construct an iterative algorithm based on :
-$$\frac{\partial E(\mathbf{w})}{\partial\mathbf{w}_j} = -2\sum_{i = 1}^{l} (y_i - \bold{x}_i^T\bold{w})(\bold{x}_i)_j$$
+$$\frac{\partial E(\mathbf{w})}{\partial\mathbf{w}_j} = -2\sum_{i = 1}^{l} (y_i - \mathbf{x}_i^T\mathbf{w})(\mathbf{x}_i)_j
+= 
+-\sum_{i=1}^{l} 2\delta_i x_{i, j}
+$$
 Where
 \begin{itemize}
-    \item $\bold{x}_i$: i-th input pattern
+    \item $\mathbf{x}_i$: i-th input pattern
     \item $y_i$: the output for $p$
-    \item $\bold{w}$: free parameters
+    \item $\mathbf{w}$: free parameters
     \item $l$: numbers of examples
-    \item $(\bold{x}_i)_j$: component $j$ of pattern $i$
+    \item $(\mathbf{x}_i)_j$: component $j$ of pattern $i$
 \end{itemize}
-Gradient (ascent direction): we can move toward the minimum with a gradient descent (- gradient of $E(\bold{w})$).\\
-Local search: begins with initial weight vector. Modifies it iteratively to decrease up to minimize the error function (steepest descent).
+Gradient (ascent direction): we can move toward the minimum with a gradient descent (- gradient of $E(\mathbf{w})$).
+
+\textbf{Local search}: begins with initial weight vector. Modifies it iteratively to decrease up to minimize the error function (steepest descent).
 \begin{figure}[H]
   \centering
   \subfloat[Gradient descent]{\includegraphics[width=0.5\textwidth]{lectures/2_linear_model/gradient_1.png}\label{fig:2_linear_model_gradient_1}}
   \hfill
   \subfloat[H for 2 –w linear model]{\includegraphics[width=0.5\textwidth]{lectures/2_linear_model/2_model_gradient_2_w}\label{fig:2_linear_model_H_for_2_w}}
-  \caption{Gradient}
+  \caption{\scriptsize In the left we can see that choosing the direction $-\frac{\partial E(\v{w}) }{\partial \v{w}} $ we are moving to the minimum of $E(\v{w})$ (step by step).}
 \end{figure}
 
 \noindent\textbf{Delta Rule}\\
 A training rule whose key idea behind the delta rule is to use gradient descent to search the hypothesis space of possible weight vectors to find the weights that best fit the training examples.\\
-The «movements» will be made iteratively according to:
-$$\bold{w}_{new} = \bold{w}_{old} + eta \times \Delta \bold{w}$$
-where $eta$ is the step size, $0<eta<1$ or a value \\
+The «movements» will be made iteratively according to the \textbf{Learning Rule}:
+$$\mathbf{w}_{new} = \mathbf{w}_{old} + eta \cdot \Delta \mathbf{w}$$
+where $eta$ is the step size, $0<eta<1$ or a value. $\Delta \mathbf{w}$ is $-\frac{\partial E(\v{w}) }{\partial \v{w}}$ (vectorial).
 
-\textbf{learning rate ($\eta$) - eta} =: speed/stability trade-off and is the step size: can be (gradually) decreased to zero (guarantee convergence, avoiding oscillation around the min.): many variants will be introduced later.\\
+\textbf{learning rate ($\eta$) - eta} =: speed/stability trade-off and is the step size: can be (gradually) decreased to zero (guarantee convergence, avoiding oscillation around the min.): many variants will be introduced later.
 
 In figure \ref{fig:2_learning_rate} is shown how the gradient descent change with different learning rate and figure \ref{fig:2_learning_curve} is shown how the learning curve can change.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.29]{lectures/2_linear_model/2_learning_rate.png}
-    \caption{Learning rate}
+    \caption{Different learning rate bring to different convergences speed and also different results.}
     \label{fig:2_learning_rate}
 \end{figure}
 \noindent\textbf{Gradient descent algorithm}
@@ -368,12 +391,13 @@ In figure \ref{fig:2_learning_rate} is shown how the gradient descent change wit
     \includegraphics[scale = 0.5]{lectures/2_linear_model/Gradient_alg.png}
     \label{fig:2_gradient_alg}
 \end{figure}
-\noindent In the stardard case we use $\Delta w/ l$ : least mean squares (when you divide by l). It's good to normalize the value of the graident, otherwise could be too large and could lead to oscillations (bad learning curve)\\
+
+In the stardard case we use $\Delta \v{w}/ l$ : least mean squares (when you divide by l). It's good to normalize the value of the graident, otherwise could be too large and could lead to oscillations (bad learning curve).
 
 There are two versions of the algorithm:
 \begin{itemize}
     \item For \textbf{batch version} the gradient is the sum over all the $l$ patterns (using $p$):
-$$\frac{\partial E(\mathbf{w})}{\partial\mathbf{w}_i} = -2\sum_{p = 1}^{l} (y_p - \bold{x}_p^T\bold{w})x_{p,i}$$
+$$\frac{\partial E(\mathbf{w})}{\partial\mathbf{w}_i} = -2\sum_{p = 1}^{l} (y_p - \mathbf{x}_p^T\mathbf{w})x_{p,i}$$
 
 So, to calculate the gradient of the cost function, we need to sum the cost of each pattern. If we have 3 million patterns, we have to loop through 3 million times or use the dot product.\\
 \noindent Note that:
@@ -386,7 +410,7 @@ So, to calculate the gradient of the cost function, we need to sum the cost of e
 \end{itemize}
 
 \item For the \textbf{on-line/stochastic version} we upgrade the weights with the error that is computed for each pattern.
-$$\frac{\partial E_p(\mathbf{w})}{\partial\mathbf{w}_i} = -2(y_p - \bold{x}_p^T\bold{w})x_{p,i}$$
+$$\frac{\partial E_p(\mathbf{w})}{\partial\mathbf{w}_i} = -2(y_p - \mathbf{x}_p^T\mathbf{w})x_{p,i}$$
 In SGD weights are updated upon examining each training example so, we only use 1 example for each learning step. Because it’s using only one example at a time, its path to the minima more random than that of the batch gradient. Usually, before for-looping, you need to randomly shuffle the training examples.
 \item We will see intermediate cases later (as \textbf{mini-batch}): Mini-batch gradient descent uses n data points (instead of 1 sample in SGD) at each iteration.
 \end{itemize}
@@ -405,10 +429,13 @@ Here an example showing how the trajectory change with different gradient descen
     \caption{Learning curve examples}
     \label{fig:2_learning_curve}
 \end{figure}
-\noindent \textbf{Gradient descent as
-Error correction rule}\\
-$$\Delta w_j = \sum_{p = 1}^{l} (y_p - \bold{x}_p^T\bold{w})(\bold{x}_p)_j$$
-This is an “error correction” rule (Widrow-Hoff) that change the $w$ proportionally to the error (target-output):\\
+\subsubsection*{Gradient descent as Error correction rule}
+\[\begin{aligned}
+&\Delta w_j = \sum_{p = 1}^{l} (y_p - \mathbf{x}_p^T\mathbf{w})(\mathbf{x}_p)_j\\
+&\v{w}_{new} = \v{w} + \eta \cdot \Delta \v{w}
+.\end{aligned}\]
+This is an “error correction” rule (Widrow-Hoff) that change the $w$ proportionally to the error (target-output):
+
 For example:
 \begin{itemize}
     \item $(target - output) = err=0 \rightarrow$ no correction
@@ -424,15 +451,10 @@ For example:
 
     \item $(input_j<0)\,\, if\,\,err\,\,- \;\; (\text{output is too high}):$
     $$increase\,\, w_j \rightarrow\,\, reduce\,\, output \rightarrow less\,\, err$$
-    
-
-    
-
-   
 \end{itemize}
-It allow us to search through an \emph{infinite hypothesis} space and it can be easily always applied for \emph{continues $H$} and differentiable loss.\\
+It allow us to search through an \emph{infinite hypothesis} space and it can be easily always applied for \emph{continues $H$} and differentiable loss.
 
-\textbf{NOTE}: Is the gradient descent efficient? Many improvement are possible: Newton and quasi-newton methods, Conjugate Gradient, ...\\
+\textbf{NOTE}: Is the gradient descent efficient? Many improvement are possible: Newton and quasi-newton methods, Conjugate Gradient, ...
 
 Here and example of Delta-W as Error Correction Learning rule:
 \begin{figure}[H]
@@ -440,7 +462,7 @@ Here and example of Delta-W as Error Correction Learning rule:
     \includegraphics[scale = 0.4]{lectures/2_linear_model/2_e_g_correction_rule.png}
 \end{figure}
 
-\noindent \textbf{Summarizing}\\
+\subsubsection{Summarizing}
 \begin{itemize}
     \item Model trained (on tr set) with LS (LMS) on $\mathbf{wx}$ by the simple gradient descent algorithm used for linear regression
     
@@ -478,21 +500,26 @@ In figure \ref{fig:2_classification_example_problem_lm_2} we can see the result 
               \right.
 \]
 
-The decision boundary is $\{\mathbf{x} \;|\; \mathbf{x^Tw} = 0.5 \}$ is linear (and seems to make many errors on the training data). Is it true?\\
+The decision boundary is $\{\mathbf{x} \;|\; \mathbf{x^Tw} = 0.5 \}$ is linear (and seems to make many errors on the training data). Is it true?
 
 \noindent \textbf{Good or bad approximation}:
 Possible scenarios (we know the true target function!):
 \begin{itemize}
     \item Scenario 1: The data in each class are generated from a Gaussian distribution with uncorrelated components, same variances, and different means.\\
-    
     In this case $\Rightarrow$ the linear regression rule (by LS) is almost optimal (is the best one can do). The region of overlap is inevitable (due to errors in the input data). 
-    
     \item Scenario 2: The data in each class are generated from a mixture of 10 gaussians in each class.\\
-    
      In this case  $\Rightarrow$ the linear model is far too rigid: next models for it!
 \end{itemize}
 
-
+\subsection{Linear Model in ML: inductive bias (Mitchell style)}%
+\begin{itemize}
+    \item Language bias: the H is a set of linear functions (may be very restrictive and rigid)
+    \item  Search bias: ordered search guided by the Least Squares minimization goal
+	\begin{itemize}
+	    \item For instance we could prefer a different method to obtain a restriction on the values of parameters, achieving a different solutions with other properties…
+	    \item It shows that even for a “simple” model there are many possibilities.  We still need a principled approach! (see theory of ML)…
+	\end{itemize}
+\end{itemize}
 
 \subsection{Linear regression (in statistics)}
 In statistics, \textbf{linear regression} is used for two things:
@@ -501,7 +528,7 @@ In statistics, \textbf{linear regression} is used for two things:
 given the value of another variable.
     \item to test whether and how a given variable is related to another variable or variables.
 \end{itemize}
-Statistical Parametric models: note that, in general,"\textbf{linear}" does not refer to this straight line, but rather to the way in which the regression coefficients occur in the regression equation. (See next for “linear basis expansion”)\\
+Statistical Parametric models: note that, in general,"\textbf{linear}" does not refer to this straight line, but rather to the way in which the regression coefficients occur in the regression equation. (See next for “linear basis expansion”).
 
 \noindent\textbf{NOTE}: Least squares corresponds to the maximum likelihood criterion if the
 experimental errors have a normal distribution.
@@ -518,20 +545,17 @@ In the Linear model we have two Bias:
 It show that even for a “simple” model there are many possibilities. We still need a principled approach! (see theory of ML)...
 
 \subsection{Limitations}
-This linear model has some limitation: It's a \textbf{rigid model}.\\
+This linear model has some limitation: It's a \textbf{rigid model}.
 
-\noindent$\blacksquare$ \textbf{Regression tasks for non linear problems}\\
+\subsubsection*{Regression tasks for non linear problems}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{lectures/1_Introduction/intro_poly_1}
+    \caption{\scriptsize In this case we have a very poor solution, a linear model can't fit a non linear problem! we have to find a solution for it!}
+    \label{fig:2task_poor}
+\end{figure}
 
-\begin{minipage}{0.5\textwidth}
-In this case we have a very poor solution, a linear model can't fit a non linear problem! we have to find a solution for it!
-\end{minipage}
-\hfill
-\begin{minipage}{0.5\textwidth}
-\includegraphics[width=\linewidth]{lectures/1_Introduction/intro_poly_1}
-\end{minipage}
-\newpage
-
-\noindent$\blacksquare$\textbf{Classification tasks}
+\subsubsection*{Classification tasks and non linear problem}
 \begin{itemize}
     \item In geometry, two set of points in a two-dimensional plot are \textbf{linearly separable} when the two sets of points can be completely separated by a single line.
     \item In general, two groups are linearly separable in $n-dimensional$ space if they can be separated by an $(n-1)-dimensional$ hyperplane.
@@ -566,12 +590,12 @@ Given 4 points we can't always find a separtion plane (we can find a labeling su
 
 
 \subsection{A generalization}
-The linear model is a very rigid model, here we will show a basis expansion. This allow to get more \textbf{Flexibility}.\\
+The linear model is a very rigid model, here we will show a basis expansion. This allow to get more \textbf{Flexibility}.
 
 \noindent$\blacksquare$\textbf{Regression task}\\
 Basis transformation(\textbf{linear basis expansion}) :
-$$h_w(\bold{x})=\sum_{k = 0}^{K} w_k\phi_k(\bold{x})$$
-Augment the input vector with additional variables ($K>n$) which are transformations of $\bold{x}$ according to a function $\phi_k: R^n\rightarrow R$. $\phi$ can be every function.\\
+$$h_w(\mathbf{x})=\sum_{k = 0}^{K} w_k\phi_k(\mathbf{x})$$
+Augment the input vector with additional variables ($K>n$) which are transformations of $\mathbf{x}$ according to a function $\phi_k: R^n\rightarrow R$. $\phi$ can be every function.
 
 E.g:
 \begin{itemize}
@@ -581,7 +605,7 @@ E.g:
     \item Splines, ...
 \end{itemize}
 
-This generalization is called: \textbf{dictionary} approaches and the model is linear in the parameters (also in phi, not in x!), so we can use the same learning algorithm as before!\\
+This generalization is called: \textbf{dictionary} approaches and the model is linear in the parameters (also in phi, not in x!), so we can use the same learning algorithm as before!
 
 \textbf{Example}:
 \begin{itemize}
@@ -604,13 +628,34 @@ For \emph{classification task} we add sign before the sum.
 
 \subsection{Improvements}
 \subsubsection{How to control model complexity? Regularization}
-\noindent$\blacksquare$\textbf{Ridge regression (Tikhonov regularization)}\\
+\paragraph{Ridge regression (Tikhonov regularization)}
 smoothed model $\rightarrow$ e.g. lower variance
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.3]{lectures/2_linear_model/tikhonov.png}
-    \label{fig:2_tikhonov}
+    \includegraphics[scale = 0.5]{lectures/2_linear_model/tikhonov.png}
 \end{figure}
+\textbf{Note}: For the objective function we use here the name Loss (used for the model training cost function) to distinguish from the Error E (useful to evaluate the model error and used for the data term inside this Loss).\\
+Hence, differently from previous assumptions the two terms are not more equivalent in our use (in the course).
+
+\subsubsection*{Tikhonov and SLT (statistical learning theory)}%
+The penality term $\lambda$ penalizes high values of the weights $w_i$:
+\begin{itemize}
+    \item Tends to \textbf{drive} all the \textbf{weights to smaller values}.
+    \item Implements a control of the model complexity.
+    \item Leads to a model with \textbf{lower VC-dim} with a trade-off obtained through just a controllable parameter $\lambda$.
+\end{itemize}
+
+\begin{exercise}
+    connect tikhonov regularization to the SLT and see:
+    \begin{itemize}
+        \item Why this can help to have a better bound on $R$?
+	\item How $\lambda$ values can rule the under/over fitting cases?
+    \end{itemize}
+\end{exercise}
+\begin{exercise}
+    Derive the new learning rule with weight decay using the Tikhonov loss (computing again the partial derivatives of $L$  with respect to $w$ )
+\end{exercise}
+
 \textbf{Lambda ($\lambda$) regularization parameter}: 
 $$ 0\leq \lambda < 1$$
 Possible to add constraints to the sum of value of $\abs{w_j}$ favouring "sparse" models e.g. with less terms due to weights $w_j=0$ (i.e. less complex solutions): ridge regression [or lasso, et al. (by different norms)]
@@ -622,6 +667,9 @@ Possible to add constraints to the sum of value of $\abs{w_j}$ favouring "sparse
     \item $\lambda$ values can rule the underfitting/overfitting cases.
 \end{itemize}
 Tikhonov regularization can be applied for every function and allow us to control the VC-dim. It's better to have a big H space and then control the search bias with $\lambda$.
+
+\textbf{Remember}: Can be applied to any kind of function, in this way you easily understand wich model is the simplest (just with one more parameter $\lambda$). This move the complexity to the \textbf{Search Bias} instead of \textbf{Language Bias}!
+
 \newpage
 \noindent$\blacksquare$\textbf{Example of control of model complexity:}\\
 Let's suppose to have a regression task and we will use this $h(\mathbf{x})$:
@@ -640,7 +688,7 @@ Let's see how we can control the complexity of the model:
 
 From the three previous cases we understand that we need a trade-off and we need to find the right lamda value that does not make us go underfitting or overfitting.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \subfloat[Lambda = 0]{\includegraphics[width=0.5\textwidth]{{lectures/2_linear_model/lambda_1.png}}\label{fig:2_lambda_1}}
   \vskip\baselineskip
@@ -676,7 +724,7 @@ There is other technology used for regularization that we will introduce in late
     \item Elastic nets (use both $\norm{\cdot}_1$ and $\norm{\cdot}_2$)
 \end{itemize}
 
-The L2 norm penalizes the square value of the weight and tends to drive all the weights to smaller values. On the other hand, the L1 norm penalizes the absolute value of the weight and tends to drive some weights to exactly zero (while allowing some weights to be large) $\rightarrow$ toward feature selection!\\
+The L2 norm penalizes the square value of the weight and tends to drive all the weights to smaller values. On the other hand, the L1 norm penalizes the absolute value of the weight and tends to drive some weights to exactly zero (while allowing some weights to be large) $\rightarrow$ toward feature selection!
 
 \textbf{NOTE}: Unfortunately $\norm{\cdot}_1$ (absolute value) introduce a non differentiable so the loss needs other approaches.
 
@@ -713,7 +761,7 @@ There is two very simple approaches for multi-class:
     \end{itemize}
     
 \end{itemize}
-OVA, AVA suffers from ambiguities in that some regions of its input space may receive the same number of votes.\\
+OVA, AVA suffers from ambiguities in that some regions of its input space may receive the same number of votes.
 
 \noindent \textbf{Criticism}:
 The problem can become not easy
