@@ -1,5 +1,5 @@
 # Notes Machine Learning 2019-2020
-Notes from the Machine Learning course held by Professor Alessio Micheli at University of Pisa 2019-2020 written by Alessandro Cudazzo and Giulia Volpi.
+Notes from the Machine Learning course held by Professor Alessio Micheli at University of Pisa 2019-2020 written by Alessandro Cudazzo and Giulia Volpi, under revision for the accademic years 2021-2022 by Edoardo Gabrielli.
 
 These notes are intended only as support for the study of the subject and as slides side notes. They do not cover the whole program but only a part, to compensate for the missing parts, we recommend the use of slides and books provided by Prof. Micheli. We hope these notes will help future students and if you find any mistakes or want to help extend these notes, feel free to do so with a Pull Request.
 
