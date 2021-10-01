@@ -513,8 +513,8 @@ Possible scenarios (we know the true target function!):
 
 \subsection{Linear Model in ML: inductive bias (Mitchell style)}%
 \begin{itemize}
-    \item Language bias: the H is a set of linear functions (may be very restrictive and rigid)
-    \item  Search bias: ordered search guided by the Least Squares minimization goal
+    \item \textbf{Language bias}: the H is a set of linear functions (may be very restrictive and rigid)
+    \item  \textbf{Search bias}: ordered search guided by the Least Squares minimization goal
 	\begin{itemize}
 	    \item For instance we could prefer a different method to obtain a restriction on the values of parameters, achieving a different solutions with other properties…
 	    \item It shows that even for a “simple” model there are many possibilities.  We still need a principled approach! (see theory of ML)…
@@ -532,17 +532,6 @@ Statistical Parametric models: note that, in general,"\textbf{linear}" does not 
 
 \noindent\textbf{NOTE}: Least squares corresponds to the maximum likelihood criterion if the
 experimental errors have a normal distribution.
-
-\subsection{Linear model (in ML): Inductive Bias (alla Mitchell)}
-In the Linear model we have two Bias:
-\begin{itemize}
-    \item \textbf{Language bias}: the H is a set of linear functions (may be very restrictive and rigid)
-
-    \item \textbf{Search bias}: ordered search guided by the Least Squares minimization goal: for instance we could prefer a different method to obtain a restriction on the values of parameters, achieving a different solutions with other properties...
-
-\end{itemize}
-
-It show that even for a “simple” model there are many possibilities. We still need a principled approach! (see theory of ML)...
 
 \subsection{Limitations}
 This linear model has some limitation: It's a \textbf{rigid model}.
@@ -670,8 +659,7 @@ Tikhonov regularization can be applied for every function and allow us to contro
 
 \textbf{Remember}: Can be applied to any kind of function, in this way you easily understand wich model is the simplest (just with one more parameter $\lambda$). This move the complexity to the \textbf{Search Bias} instead of \textbf{Language Bias}!
 
-\newpage
-\noindent$\blacksquare$\textbf{Example of control of model complexity:}\\
+\subsubsection*{Example of control of model complexity:}
 Let's suppose to have a regression task and we will use this $h(\mathbf{x})$:
 
 $$ h(\mathbf{x}) = w_0 + w_1x + w_2x^2 + \dots + w_Mx^M = \sum_{j = 0}^M w_jx^j$$

@@ -1,7 +1,7 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 \section{K-Nearest Neighbor Model}
-In the previous section we analyzed a quite rigid model, now we will move to the K-Nearest Neighbor (k-nn) model, a very flexible approach.\\
+In the previous section we analyzed a quite rigid model, now we will move to the K-Nearest Neighbor (k-nn) model, a very flexible approach.
 
 The k-nearest neighbors algorithm (k-NN) is a non-parametric method used for classification and regression. In both cases, the input consists of the k closest training examples in the feature space. The output depends on whether k-NN is used for classification or regression. More in details:
 
@@ -10,10 +10,7 @@ K-nn is a \textbf{Lazy} learning algorithm, it store the training data and wait 
     \item It makes \textbf{local estimations} (by locally constant functions) and has not global hypothesis for all the instances, no model to be fit
     \item we need to memorize the input examples
 \end{itemize} 
-This method is in also called \textbf{distance-based methods}, memory based or instance-based.\\ 
-
-
-
+This method is in also called \textbf{distance-based methods}, memory based or instance-based.
 
 Let take once again the example used for classification, we have seen that applying the linear model seems to make many errors on the training data. let's see what happens when applying a more flexible method like the \textbf{K-nn}.
 
@@ -25,8 +22,6 @@ Let take once again the example used for classification, we have seen that apply
   \caption{Solution of a classification example with LMS}
 \end{figure}
 
-\noindent Let's start to analyze the 1-kk case.\\
-
 \subsection{1-Nearest Neighbor Algorithm}
 The algorithm for the 1-nn case is:
 \begin{enumerate}
@@ -34,12 +29,10 @@ The algorithm for the 1-nn case is:
     \item given an input $\mathbf{x}$ (with dimension $n$)
     \item now we want to find the nearest training example $\mathbf{x}_i$:\\
             find the index $i$ s.t. we have the min $d(\mathbf{x},\mathbf{x_i}) \rightarrow i(\mathbf{x}) = \mbox{arg}\min_{j} d(\mathbf{x},\mathbf{x_j})$\\
-            
             e.g.  Euclidian distance: $d(\mathbf{x},\mathbf{x_j}) = \sqrt{\sum_{t = 1}^n (x_t - x_{jt})^2} = \norm{\mathbf{x} - \mathbf{x}_j} $ (pattern $\mathbf{x_j}$, component $t$) 
     \item then output $y_i$
 \end{enumerate}
-
-\noindent By applying the algorithm to the problem above we can see how this new model works.
+By applying the algorithm to the problem above we can see how this new model works.
 The result of the 1-nn algorithm is shown in fig. \ref{fig:3_1nn_eg}\\
 
 \begin{figure}
@@ -101,7 +94,7 @@ majority vote amongst the 15-nearest neighbors.\\
     \item Decision boundary adapts to the local densities of the classes
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.25]{lectures/3_K_nn/3_15nn_eg.png}
     \caption{15-Nearest Neighbor Classifier}
@@ -305,7 +298,7 @@ We have examined two learning techniques for prediction so far: the stable but b
     if the target depends on only few of many features in x (e.g. 2 out 20), we could retrieve a “similar pattern” with the similarity dominated by the large number of irrelevant features. It grows with the dimensionality.
     
     
-    \item \textbf{All sample points are close to an edge of the sample (From \textit{Hastie}}
+\item \textbf{All sample points are close to an edge of the sample (From \textit{Hastie})}
     Another consequence of the sparse sampling in high dimensions is that all sample points are close to an edge of the sample. Consider N data points uniformly distributed in a d-dimensional unit ball centered at the origin. Suppose we consider a nearest-neighbor estimate at the origin. The median distance from the origin to the closest data point is given by the expression:
     $$ d(d,l) = \left(1 - \frac{1^{1/l}}{2}\right)^{1/d}$$
     A more complicated expression exists for the mean distance to the closest point. For $l = 500$, $d = 10$ , $d(d,l) \approx	0.52$, more than halfway to the boundary. Hence most data points are closer to the boundary of the sample space than to any other data point. The reason that this presents a problem is that prediction is much more difficult near the edges of the training sample. One must extrapolate from neighboring sample points rather than interpolate between them.
